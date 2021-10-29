@@ -52,11 +52,12 @@
 
 
 
+    <!--남현 - 211029 녹음기능 추가-->
     <!--녹음내역들이 담길 리사이클러뷰-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="409dp"
-        android:layout_height="620dp"
+        android:layout_height="380dp"
 
         app:layout_constraintBottom_toTopOf="@id/recordLayout"
 
