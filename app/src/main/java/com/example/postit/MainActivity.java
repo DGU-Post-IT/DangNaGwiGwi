@@ -45,14 +45,14 @@ public class MainActivity extends AppCompatActivity {
         user.put("last", "Lovelace");
         user.put("born", 1815);
         uploadButton.setOnClickListener(v->{
-            String temp = editText.getEditableText().toString();
+            String temp = editText.getText().toString();
             uploadData(db,user,temp);
         });
 
 
 
         queryButton.setOnClickListener(v->{
-            String key = keyEditText.getEditableText().toString();
+            String key = keyEditText.getText().toString();
             DocumentReference docRef = db.collection("users").document(key);
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
