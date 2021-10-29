@@ -20,9 +20,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.File;
@@ -73,6 +76,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void DBtest(){
+        Button uploadButton = (Button) findViewById(R.id.upload_button);
+        Button queryButton = (Button) findViewById(R.id.get_data_button);
+
+        EditText keyEditText = (EditText) findViewById(R.id.query_key);
+        TextView queryResultTextView = (TextView) findViewById(R.id.query_result_textview);
+
         EditText editText = findViewById(R.id.editText);
 
         // Access a Cloud Firestore instance from your Activity
@@ -84,24 +93,51 @@ public class MainActivity extends AppCompatActivity {
         user.put("first", "Ada");
         user.put("last", "Lovelace");
         user.put("born", 1815);
+        uploadButton.setOnClickListener(v->{
+            String temp = editText.getText().toString();
+            uploadData(db,user,temp);
+        });
 
 
-        // Add a new document with a generated ID
-        db.collection("users")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+
+        queryButton.setOnClickListener(v->{
+            String key = keyEditText.getText().toString();
+            DocumentReference docRef = db.collection("users").document(key);
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Log.d("get!!!", "DocumentSnapshot data: " + document.getData());
+                            queryResultTextView.setText(document.getData().toString());
+                        } else {
+                            Log.d("get!!!", "No such document");
+                        }
+                    } else {
+                        Log.d("get!!!", "get failed with ", task.getException());
+                    }
+                }
+            });
+        });
+
+
+    }
+    private void uploadData(FirebaseFirestore db, Map<String, Object> user,String temp) {
+        db.collection("users").document(temp)
+                .set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d("u", "DocumentSnapshot added with ID: " + documentReference.getId());
+                    public void onSuccess(Void aVoid) {
+                        Log.d("upload!!", "DocumentSnapshot successfully written!");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w("u", "Error adding document", e);
+                        Log.w("upload!!", "Error writing document", e);
                     }
                 });
-
     }
 
     //211029 녹음 클래스 추가
