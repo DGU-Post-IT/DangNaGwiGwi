@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DB TEST : "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:hint="db에 넣을 데이터의 키"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="upload"
+        android:id="@+id/upload_button"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="가져올 아이템의 키"
+        android:id="@+id/query_key"
+        />
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:id="@+id/get_data_button"
+        android:text="get"
+        />
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/query_result_textview"
+        android:background="@color/black"
+        android:textColor="@color/white"
+        tools:text="result"
+        />
+
+
+
+    <!--녹음내역들이 담길 리사이클러뷰-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="409dp"
+        android:layout_height="620dp"
+
+        app:layout_constraintBottom_toTopOf="@id/recordLayout"
+
+        />
+
+    <!--녹음 제어 레이아웃웃-->
+    <LinearLayout
+        android:id="@+id/recordLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!--녹음 실행 및 중지 버튼-->
+        <ImageButton
+            android:id="@+id/audioRecordImageBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:src="@drawable/ic_baseline_fiber_manual_record_24"/>
+
+        <TextView
+            android:id="@+id/audioRecordText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="녹음 시작"
+            android:textSize="24dp" />
+
+    </LinearLayout>
+
+</LinearLayout>
