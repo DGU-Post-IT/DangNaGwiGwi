@@ -42,7 +42,6 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
 
-
     //남현 - 211029 오디오 변수 추가
     /**xml 변수*/
     ImageButton audioRecordImageBtn;

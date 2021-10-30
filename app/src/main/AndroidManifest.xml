@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.postit">
 
-    <!--인터넷, 녹음, 통화기록 권한 추가-->
+    <!--인터넷, 녹음, 통화기록 권한 추가--> 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.READ_CALL_LOG"/>
