@@ -2,10 +2,13 @@ package com.example.postit;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CallLog;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -38,6 +41,8 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
+
+
     //남현 - 211029 오디오 변수 추가
     /**xml 변수*/
     ImageButton audioRecordImageBtn;
@@ -65,6 +70,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    //남현 - 211031 통화기록 검색 변수 추가
+    Button btn_call;
+    TextView textView_call;
+    EditText editText_callNumber;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,9 +84,11 @@ public class MainActivity extends AppCompatActivity {
 
         DBtest();
         record();
+        callNumber();
 
     }
-
+    
+    //남현, 집민 - 211029 DBtest추가
     public void DBtest(){
         Button uploadButton = (Button) findViewById(R.id.upload_button);
         Button queryButton = (Button) findViewById(R.id.get_data_button);
@@ -123,6 +137,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    
+    //집민 - 211030 DBtest 데이터 업로드/다운로드 추가
     private void uploadData(FirebaseFirestore db, Map<String, Object> user,String temp) {
         db.collection("users").document(temp)
                 .set(user)
@@ -140,7 +156,9 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    //211029 녹음 클래스 추가
+
+
+    //남현 - 211029 녹음 클래스 추가
     // xml 변수 초기화
     // 리사이클러뷰 생성 및 클릭 이벤트
     private void record() {
@@ -306,5 +324,60 @@ public class MainActivity extends AppCompatActivity {
         playIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_play_circle_filled_24, null));
         isPlaying = false;
         mediaPlayer.stop();
+    }
+
+
+
+    //남현 - 211031 전화번호 검색 기능 추가
+    public void callNumber(){
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CALL_LOG}, MODE_PRIVATE);
+
+        btn_call = (Button)findViewById(R.id.btn_call);
+        textView_call = (TextView)findViewById(R.id.textView_call);
+        textView_call.setMovementMethod(new ScrollingMovementMethod());
+        editText_callNumber = (EditText)findViewById(R.id.editText_callNumber);
+        btn_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textView_call.setText(getCallHistory());
+            }
+        });
+    }
+    
+    // 통화기록 DB에서 가져옴
+    public String getCallHistory(){
+        String[] callSet = new String[]{
+                CallLog.Calls.DATE, CallLog.Calls.TYPE, CallLog.Calls.NUMBER, CallLog.Calls.DURATION};
+        Cursor c = getContentResolver().query(CallLog.Calls.CONTENT_URI, callSet,
+                null, null, null);
+        if(c.getCount() == 0){
+            return "통화기록 없음";
+        }
+        StringBuffer callBuff = new StringBuffer();
+        callBuff.append("\n날짜 : 구분 : 전화번호 : 통화시간 \n\n");
+        c.moveToFirst();
+
+        String lookfor = editText_callNumber.getText().toString();
+
+        do{
+            if(c.getString(2).equals(lookfor)){
+                long callData = c.getLong(0);
+                SimpleDateFormat datePattern = new SimpleDateFormat("yyyy-MM-dd");
+                String date_str = datePattern.format(new Date(callData));
+                callBuff.append(date_str + ":");
+                if(c.getInt(1) == CallLog.Calls.INCOMING_TYPE)
+                    callBuff.append("착신 :");
+                else
+                    callBuff.append("발신 :");
+                //callBuff.append(c.getString(2) + ":");
+
+                callBuff.append(c.getString(2) + ":");
+                callBuff.append(c.getString(3) + "초\n");
+            }
+
+        }while(c.moveToNext());
+
+        c.close();
+        return callBuff.toString();
     }
 }

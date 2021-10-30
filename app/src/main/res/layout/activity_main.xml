@@ -7,27 +7,43 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DB TEST : "
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:layout_width="wrap_content"
+    <!-- 집민 - 211030 DB에 데이터 업로드/다운로드 기능 추가 -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
-        android:hint="db에 넣을 데이터의 키"
-        />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="upload"
-        android:id="@+id/upload_button"
-        />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DB TEST : "
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText"
+            android:hint="db에 넣을 데이터의 키"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="upload"
+            android:id="@+id/upload_button"
+            />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
     <EditText
         android:layout_width="wrap_content"
@@ -36,60 +52,118 @@
         android:id="@+id/query_key"
         />
     <Button
-        android:layout_width="80dp"
-        android:layout_height="50dp"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
         android:id="@+id/get_data_button"
         android:text="get"
+        android:layout_marginRight="10dp"
         />
+
     <TextView
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_width="170dp"
+        android:layout_height="40dp"
         android:id="@+id/query_result_textview"
         android:background="@color/black"
         android:textColor="@color/white"
         tools:text="result"
         />
 
-
+    </LinearLayout>
 
     <!--남현 - 211029 녹음기능 추가-->
-    <!--녹음내역들이 담길 리사이클러뷰-->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:layout_width="409dp"
-        android:layout_height="380dp"
-
-        app:layout_constraintBottom_toTopOf="@id/recordLayout"
-
-        />
-
-    <!--녹음 제어 레이아웃웃-->
     <LinearLayout
         android:id="@+id/recordLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <!--녹음 실행 및 중지 버튼-->
-        <ImageButton
-            android:id="@+id/audioRecordImageBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:src="@drawable/ic_baseline_fiber_manual_record_24"/>
+        <!--녹음내역들이 담길 리사이클러뷰-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
 
-        <TextView
-            android:id="@+id/audioRecordText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="녹음 시작"
-            android:textSize="24dp" />
+            app:layout_constraintBottom_toTopOf="@id/recordLayout"
+            />
+
+        <!--녹음 제어 레이아웃-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <!--녹음 실행 및 중지 버튼-->
+                <ImageButton
+                    android:id="@+id/audioRecordImageBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_baseline_fiber_manual_record_24"/>
+
+                <TextView
+                    android:id="@+id/audioRecordText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="녹음 시작"
+                    android:textSize="20dp" />
+
+                ></LinearLayout>
 
     </LinearLayout>
+
+
+
+    <!-- 남현 - 211031 통화기록 검색기능 추가 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="통화기록 검색 : "
+            android:textSize="15dp"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="번호를 입력하세요"
+            android:id="@+id/editText_callNumber"
+            android:layout_marginRight="20dp"
+            android:inputType="number"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="검색"
+            android:id="@+id/btn_call"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_call"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:scrollbars="vertical"
+        android:scrollbarFadeDuration = "0"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbarThumbVertical="@color/black"
+        android:scrollbarTrackVertical="@color/white"/>
+
+
+
+
 
 </LinearLayout>
