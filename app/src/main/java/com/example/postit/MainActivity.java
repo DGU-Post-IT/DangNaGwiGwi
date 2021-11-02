@@ -1,6 +1,7 @@
 package com.example.postit;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.media.MediaPlayer;
@@ -17,16 +18,25 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.postit.databinding.ActivityMainBinding;
+import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
+import com.firebase.ui.auth.IdpResponse;
+import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,19 +45,25 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
 
     //남현 - 211029 오디오 변수 추가
-    /**xml 변수*/
+    /**
+     * xml 변수
+     */
     ImageButton audioRecordImageBtn;
     TextView audioRecordText;
 
-    /**오디오 파일 관련 변수*/
+    /**
+     * 오디오 파일 관련 변수
+     */
     // 오디오 권한
     private String recordPermission = Manifest.permission.RECORD_AUDIO;
     private int PERMISSION_CODE = 21;
@@ -63,10 +79,11 @@ public class MainActivity extends AppCompatActivity {
     private Boolean isPlaying = false;
     ImageView playIcon;
 
-    /** 리사이클러뷰 */
+    /**
+     * 리사이클러뷰
+     */
     private AudioAdapter audioAdapter;
     private ArrayList<Uri> audioList;
-
 
 
     //남현 - 211031 통화기록 검색 변수 추가
@@ -74,21 +91,39 @@ public class MainActivity extends AppCompatActivity {
     TextView textView_call;
     EditText editText_callNumber;
 
-
-
+    private ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         DBtest();
         record();
         callNumber();
 
+        bindLoginoutButton();
+
+
     }
-    
+
+    private void bindLoginoutButton() {
+        binding.loginButton.setOnClickListener((v)->{
+            loginStart();
+        });
+        binding.logoutButton.setOnClickListener((v)->{
+            AuthUI.getInstance()
+                    .signOut(this)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        public void onComplete(@NonNull Task<Void> task) {
+                            binding.idTextView.setText("로그아웃 됨");
+                        }
+                    });
+        });
+    }
+
     //남현, 집민 - 211029 DBtest추가
-    public void DBtest(){
+    public void DBtest() {
         Button uploadButton = (Button) findViewById(R.id.upload_button);
         Button queryButton = (Button) findViewById(R.id.get_data_button);
 
@@ -106,14 +141,13 @@ public class MainActivity extends AppCompatActivity {
         user.put("first", "Ada");
         user.put("last", "Lovelace");
         user.put("born", 1815);
-        uploadButton.setOnClickListener(v->{
+        uploadButton.setOnClickListener(v -> {
             String temp = editText.getText().toString();
-            uploadData(db,user,temp);
+            uploadData(db, user, temp);
         });
 
 
-
-        queryButton.setOnClickListener(v->{
+        queryButton.setOnClickListener(v -> {
             String key = keyEditText.getText().toString();
             DocumentReference docRef = db.collection("users").document(key);
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -136,9 +170,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    
+
     //집민 - 211030 DBtest 데이터 업로드/다운로드 추가
-    private void uploadData(FirebaseFirestore db, Map<String, Object> user,String temp) {
+    private void uploadData(FirebaseFirestore db, Map<String, Object> user, String temp) {
         db.collection("users").document(temp)
                 .set(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -156,7 +190,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     //남현 - 211029 녹음 클래스 추가
     // xml 변수 초기화
     // 리사이클러뷰 생성 및 클릭 이벤트
@@ -167,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
         audioRecordImageBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isRecording) {
+                if (isRecording) {
                     // 현재 녹음 중 O
                     // 녹음 상태에 따른 변수 아이콘 & 텍스트 변경
                     isRecording = false; // 녹음 상태 값
@@ -181,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
                      *       1. Audio 권한 체크
                      *       2. 처음으로 녹음 실행한건지 여부 확인
                      * */
-                    if(checkAudioPermission()) {
+                    if (checkAudioPermission()) {
                         // 녹음 상태에 따른 변수 아이콘 & 텍스트 변경
                         isRecording = true; // 녹음 상태 값
                         audioRecordImageBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_record_voice_over_24, null)); // 녹음 상태 아이콘 변경
@@ -216,9 +249,9 @@ public class MainActivity extends AppCompatActivity {
 
                 File file = new File(uriName);
 
-                if(isPlaying){
+                if (isPlaying) {
                     // 음성 녹화 파일이 여러개를 클릭했을 때 재생중인 파일의 Icon을 비활성화(비 재생중)으로 바꾸기 위함.
-                    if(playIcon == (ImageView)view){
+                    if (playIcon == (ImageView) view) {
                         // 같은 파일을 클릭했을 경우
                         stopAudio();
                     } else {
@@ -227,11 +260,11 @@ public class MainActivity extends AppCompatActivity {
                         stopAudio();
 
                         // 새로 파일 재생하기
-                        playIcon = (ImageView)view;
+                        playIcon = (ImageView) view;
                         playAudio(file);
                     }
                 } else {
-                    playIcon = (ImageView)view;
+                    playIcon = (ImageView) view;
                     playAudio(file);
                 }
             }
@@ -254,7 +287,7 @@ public class MainActivity extends AppCompatActivity {
         String recordPath = getExternalFilesDir("/").getAbsolutePath();
         // 파일 이름 변수를 현재 날짜가 들어가도록 초기화. 그 이유는 중복된 이름으로 기존에 있던 파일이 덮어 쓰여지는 것을 방지하고자 함.
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        audioFileName = recordPath + "/" +"RecordExample_" + timeStamp + "_"+"audio.mp4";
+        audioFileName = recordPath + "/" + "RecordExample_" + timeStamp + "_" + "audio.mp4";
 
         //Media Recorder 생성 및 설정
         mediaRecorder = new MediaRecorder();
@@ -326,15 +359,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     //남현 - 211031 전화번호 검색 기능 추가
-    public void callNumber(){
+    public void callNumber() {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CALL_LOG}, MODE_PRIVATE);
 
-        btn_call = (Button)findViewById(R.id.btn_call);
-        textView_call = (TextView)findViewById(R.id.textView_call);
+        btn_call = (Button) findViewById(R.id.btn_call);
+        textView_call = (TextView) findViewById(R.id.textView_call);
         textView_call.setMovementMethod(new ScrollingMovementMethod());
-        editText_callNumber = (EditText)findViewById(R.id.editText_callNumber);
+        editText_callNumber = (EditText) findViewById(R.id.editText_callNumber);
         btn_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -342,14 +374,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    
+
     // 통화기록 DB에서 가져옴
-    public String getCallHistory(){
+    public String getCallHistory() {
         String[] callSet = new String[]{
                 CallLog.Calls.DATE, CallLog.Calls.TYPE, CallLog.Calls.NUMBER, CallLog.Calls.DURATION};
         Cursor c = getContentResolver().query(CallLog.Calls.CONTENT_URI, callSet,
                 null, null, null);
-        if(c.getCount() == 0){
+        if (c.getCount() == 0) {
             return "통화기록 없음";
         }
         StringBuffer callBuff = new StringBuffer();
@@ -358,13 +390,13 @@ public class MainActivity extends AppCompatActivity {
 
         String lookfor = editText_callNumber.getText().toString();
 
-        do{
-            if(c.getString(2).equals(lookfor)){
+        do {
+            if (c.getString(2).equals(lookfor)) {
                 long callData = c.getLong(0);
                 SimpleDateFormat datePattern = new SimpleDateFormat("yyyy-MM-dd");
                 String date_str = datePattern.format(new Date(callData));
                 callBuff.append(date_str + ":");
-                if(c.getInt(1) == CallLog.Calls.INCOMING_TYPE)
+                if (c.getInt(1) == CallLog.Calls.INCOMING_TYPE)
                     callBuff.append("착신 :");
                 else
                     callBuff.append("발신 :");
@@ -374,9 +406,49 @@ public class MainActivity extends AppCompatActivity {
                 callBuff.append(c.getString(3) + "초\n");
             }
 
-        }while(c.moveToNext());
+        } while (c.moveToNext());
 
         c.close();
         return callBuff.toString();
     }
+
+    // 1102 로그인 결과 콜백 등록
+    private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
+            new FirebaseAuthUIActivityResultContract(),
+            new ActivityResultCallback<FirebaseAuthUIAuthenticationResult>() {
+                @Override
+                public void onActivityResult(FirebaseAuthUIAuthenticationResult result) {
+                    onSignInResult(result);
+                }
+            }
+    );
+    // 로그인 결과 콜백 함수
+    private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
+        IdpResponse response = result.getIdpResponse();
+        if (result.getResultCode() == RESULT_OK) {
+            // Successfully signed in
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            binding.idTextView.setText(user.getUid());
+        } else {
+            // Sign in failed. If response is null the user canceled the
+            // sign-in flow using the back button. Otherwise check
+            // response.getError().getErrorCode() and handle the error.
+            // ...
+        }
+    }
+    //로그인 화면 시작
+    void loginStart() {
+        List<AuthUI.IdpConfig> providers = Arrays.asList(
+                new AuthUI.IdpConfig.EmailBuilder().build(),
+                new AuthUI.IdpConfig.GoogleBuilder().build());
+
+        // Create and launch sign-in intent
+        Intent signInIntent = AuthUI.getInstance()
+                .createSignInIntentBuilder()
+                .setAvailableProviders(providers)
+                .build();
+        signInLauncher.launch(signInIntent);
+    }
+
+
 }
