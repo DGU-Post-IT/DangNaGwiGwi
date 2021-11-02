@@ -162,6 +162,12 @@
         android:scrollbarThumbVertical="@color/black"
         android:scrollbarTrackVertical="@color/white"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:id="@+id/login_button"
+        android:text="login"
+        />
 
 
 
