@@ -168,21 +168,6 @@
         android:id="@+id/login_button"
         android:text="login"
         />
-    <TextView
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:background="@color/white"
-        android:textColor="@color/black"
-        android:hint="ID value"
-        android:textSize="24sp"
-        android:id="@+id/id_text_view"
-        />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:id="@+id/logout_button"
-        android:text="logout"
-        />
 
 
 
