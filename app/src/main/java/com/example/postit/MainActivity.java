@@ -8,6 +8,7 @@ import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.CallLog;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +27,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.postit.databinding.ActivityMainBinding;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,6 +35,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
@@ -57,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     // 오디오 권한
     private String recordPermission = Manifest.permission.RECORD_AUDIO;
     private int PERMISSION_CODE = 21;
+    private int PERMISSIONs_CODE = 24;
 
     // 오디오 파일 녹음 관련 변수
     private MediaRecorder mediaRecorder;
@@ -82,11 +89,13 @@ public class MainActivity extends AppCompatActivity {
     EditText editText_callNumber;
 
     private ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        checkStoragePermission();
 
         DBtest();
         record();
@@ -97,9 +106,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     private void bindLoginButton() {
-        binding.loginButton.setOnClickListener((v)->{
-            Intent profileIntent = new Intent(this,ProfileActivity.class);
+        binding.loginButton.setOnClickListener((v) -> {
+            Intent profileIntent = new Intent(this, ProfileActivity.class);
             startActivity(profileIntent);
         });
 
@@ -184,13 +194,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (isRecording) {
+                    try {
+                        mediaRecorder.stop();
+                    } catch (RuntimeException ex) {
+
+                    }
+                    mediaRecorder.release();
+                    mediaRecorder = null;
                     // 현재 녹음 중 O
                     // 녹음 상태에 따른 변수 아이콘 & 텍스트 변경
                     isRecording = false; // 녹음 상태 값
                     audioRecordImageBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_fiber_manual_record_24, null)); // 녹음 상태 아이콘 변경
                     audioRecordText.setText("녹음 시작"); // 녹음 상태 텍스트 변경
-                    stopRecording();
                     // 녹화 이미지 버튼 변경 및 리코딩 상태 변수값 변경
+                    stopRecording();
                 } else {
                     // 현재 녹음 중 X
                     /*절차
@@ -202,7 +219,8 @@ public class MainActivity extends AppCompatActivity {
                         isRecording = true; // 녹음 상태 값
                         audioRecordImageBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_record_voice_over_24, null)); // 녹음 상태 아이콘 변경
                         audioRecordText.setText("녹음 중"); // 녹음 상태 텍스트 변경
-                        startRecording();
+                        mediaRecorder = new MediaRecorder();
+                        resetRecorder();
                     }
                 }
             }
@@ -264,50 +282,88 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // 녹음 시작
-    private void startRecording() {
-        //파일의 외부 경로 확인
-        String recordPath = getExternalFilesDir("/").getAbsolutePath();
-        // 파일 이름 변수를 현재 날짜가 들어가도록 초기화. 그 이유는 중복된 이름으로 기존에 있던 파일이 덮어 쓰여지는 것을 방지하고자 함.
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        audioFileName = recordPath + "/" + "RecordExample_" + timeStamp + "_" + "audio.mp4";
+    private boolean checkStoragePermission() {
+        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONs_CODE);
+            return false;
+        }
+    }
 
-        //Media Recorder 생성 및 설정
-        mediaRecorder = new MediaRecorder();
+    File audioFile;
+
+    //녹음기 초기화
+    private void resetRecorder() {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        audioFileName = "RecordExample_" + timeStamp + "_" + "audio.3gp";
+        audioFile = new File(Environment.getExternalStorageDirectory(),
+                audioFileName);
+
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        mediaRecorder.setOutputFile(audioFileName);
         mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        mediaRecorder.setAudioEncodingBitRate(16);
+        mediaRecorder.setAudioSamplingRate(44100);
+        mediaRecorder.setOutputFile(audioFile.getAbsolutePath());
 
         try {
             mediaRecorder.prepare();
+            mediaRecorder.start();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //녹음 시작
-        mediaRecorder.start();
     }
 
     // 녹음 종료
     private void stopRecording() {
-        // 녹음 종료 종료
-        mediaRecorder.stop();
-        mediaRecorder.release();
-        mediaRecorder = null;
-
         // 파일 경로(String) 값을 Uri로 변환해서 저장
         //      - Why? : 리사이클러뷰에 들어가는 ArrayList가 Uri를 가지기 때문
         //      - File Path를 알면 File을  인스턴스를 만들어 사용할 수 있기 때문
-        audioUri = Uri.parse(audioFileName);
-
-
+        Uri audioUri = Uri.fromFile(audioFile);
         // 데이터 ArrayList에 담기
         audioList.add(audioUri);
-
-
         // 데이터 갱신
         audioAdapter.notifyDataSetChanged();
 
+        uploadFileWithUri(audioUri);
+
+    }
+    //Uri로 파일 업로드
+    private void uploadFileWithUri(Uri audioUri) {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference ref = storage.getReference();
+        StorageReference fileRef = ref.child("audio/" + audioUri.getLastPathSegment());
+        UploadTask uploadTask = fileRef.putFile(audioUri);
+        Toast.makeText(this,"업로드 시작 중..",Toast.LENGTH_SHORT);
+
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    Log.d("upload!!", "fail!!1");
+                    throw task.getException();
+                }
+
+                // Continue with the task to get the download URL
+                return fileRef.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                    Log.d("upload!!", downloadUri.toString());
+                    Toast.makeText(getApplicationContext(),"업로드 성공",Toast.LENGTH_SHORT);
+                } else {
+                    // Handle failures
+                    // ...
+                    Log.d("upload!!", "fail!!");
+                }
+            }
+        });
     }
 
     // 녹음 파일 재생
@@ -334,7 +390,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // 녹음 파일 중지
+    // 녹음 파일 재생 중지
     private void stopAudio() {
         playIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_play_circle_filled_24, null));
         isPlaying = false;
@@ -395,6 +451,16 @@ public class MainActivity extends AppCompatActivity {
         return callBuff.toString();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (mediaRecorder != null) {
+            mediaRecorder.stop();
+            mediaRecorder.release();
+            mediaRecorder = null;
+        }
+    }
 
 
 }

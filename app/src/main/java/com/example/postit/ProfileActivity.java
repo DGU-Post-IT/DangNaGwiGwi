@@ -2,7 +2,9 @@ package com.example.postit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
+import android.widget.RadioButton;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -55,7 +57,8 @@ public class ProfileActivity extends AppCompatActivity {
             String name = binding.nameEditText.getText().toString();
             int checkedRadioButtonId = binding.sexSelectGroup.getCheckedRadioButtonId();
             int sex = -1;
-            if (findViewById(checkedRadioButtonId).getTag() == "m") {
+            RadioButton br = (RadioButton) (findViewById(checkedRadioButtonId));
+            if (br.getTag().equals("m")) {
                 sex=1;
             }else{
                 sex=2;
