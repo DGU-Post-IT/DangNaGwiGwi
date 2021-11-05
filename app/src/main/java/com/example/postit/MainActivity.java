@@ -27,11 +27,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.postit.databinding.ActivityMainBinding;
+import com.example.postit.model.AudioRecord;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -88,7 +90,14 @@ public class MainActivity extends AppCompatActivity {
     TextView textView_call;
     EditText editText_callNumber;
 
+    //뷰바인딩
     private ActivityMainBinding binding;
+
+    //파이어베이스 파이어스토어DB
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    //파이어베이스 로그인 인증 객체
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,16 +110,21 @@ public class MainActivity extends AppCompatActivity {
         record();
         callNumber();
 
-        bindLoginButton();
+        bindView();
 
 
     }
 
 
-    private void bindLoginButton() {
+    private void bindView() {
         binding.loginButton.setOnClickListener((v) -> {
             Intent profileIntent = new Intent(this, ProfileActivity.class);
             startActivity(profileIntent);
+        });
+
+        binding.voiceHistoryButton.setOnClickListener((v)->{
+            Intent intent = new Intent(this, VoiceHistoryActivity.class);
+            startActivity(intent);
         });
 
     }
@@ -331,13 +345,14 @@ public class MainActivity extends AppCompatActivity {
         uploadFileWithUri(audioUri);
 
     }
+
     //Uri로 파일 업로드
     private void uploadFileWithUri(Uri audioUri) {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference ref = storage.getReference();
         StorageReference fileRef = ref.child("audio/" + audioUri.getLastPathSegment());
         UploadTask uploadTask = fileRef.putFile(audioUri);
-        Toast.makeText(this,"업로드 시작 중..",Toast.LENGTH_SHORT);
+        Toast.makeText(this, "업로드 시작 중..", Toast.LENGTH_SHORT);
 
         Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @Override
@@ -356,7 +371,8 @@ public class MainActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Uri downloadUri = task.getResult();
                     Log.d("upload!!", downloadUri.toString());
-                    Toast.makeText(getApplicationContext(),"업로드 성공",Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(), "업로드 성공", Toast.LENGTH_SHORT);
+                    writeAudioRecordDatabase(downloadUri.toString());
                 } else {
                     // Handle failures
                     // ...
@@ -364,6 +380,23 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void writeAudioRecordDatabase(String downloadUri) {
+        DocumentReference ref = db.collection("audioFile").document();
+        AudioRecord audioRecord = new AudioRecord(auth.getCurrentUser().getUid(), downloadUri, new ArrayList<>());
+        ref.set(audioRecord).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d("TAG", "DocumentSnapshot successfully updated!");
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error updating document", e);
+                    }
+                });
     }
 
     // 녹음 파일 재생
