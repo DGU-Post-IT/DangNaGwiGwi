@@ -176,6 +176,13 @@
         android:text="voice record"
         />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:id="@+id/question_activity_button"
+        android:text="question activity 볼륨주의"
+        />
+
 
 
 

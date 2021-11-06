@@ -48,6 +48,8 @@ public class VoiceHistoryActivity extends AppCompatActivity {
 
 
 
+
+
     }
 
     private void initRecyclerView() {
@@ -81,6 +83,7 @@ public class VoiceHistoryActivity extends AppCompatActivity {
     private void getListOfVoiceHistory(){
         db.collection("audioFile")
                 .whereEqualTo("speakerID", auth.getCurrentUser().getUid())
+                .orderBy("time", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
