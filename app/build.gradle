@@ -31,6 +31,10 @@ android {
         enabled true
     }
 }
+repositories{
+
+    maven { url 'https://jitpack.io' }
+}
 
 dependencies {
 
@@ -44,6 +48,8 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:28.4.2')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
     // Declare the dependency for the Cloud Firestore library
     // When using the BoM, you don't specify versions in Firebase library dependencies

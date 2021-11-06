@@ -127,6 +127,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        binding.questionActivityButton.setOnClickListener((v)->{
+            Intent intent = new Intent(this, QuestionActivity.class);
+            startActivity(intent);
+        });
+
     }
 
     //남현, 집민 - 211029 DBtest추가
