@@ -73,6 +73,13 @@
         android:id="@+id/info_save_button"
         />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="자녀 관계 보기"
+        android:id="@+id/children_relation_button"
+        />
+
 
 
 </LinearLayout>
