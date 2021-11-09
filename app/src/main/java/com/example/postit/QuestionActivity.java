@@ -10,6 +10,7 @@ import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.PersistableBundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import androidx.core.app.ActivityCompat;
 
 import com.example.postit.databinding.ActivityQuestionBinding;
 import com.example.postit.model.AudioRecord;
+import com.example.postit.model.EmotionRecord;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -58,6 +60,35 @@ public class QuestionActivity extends AppCompatActivity {
         binding = ActivityQuestionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        bindEmotionDialog();
+
+    }
+
+    private void bindEmotionDialog() {
+        binding.happyButton.setOnClickListener((v) -> {
+            saveEmotionRecordOnDataBase(1);
+        });
+        binding.sadButton.setOnClickListener((v) -> {
+            saveEmotionRecordOnDataBase(2);
+        });
+        binding.angryButton.setOnClickListener((v) -> {
+            saveEmotionRecordOnDataBase(3);
+        });
+        binding.sosoButton.setOnClickListener((v) -> {
+            saveEmotionRecordOnDataBase(4);
+        });
+
+    }
+
+    void saveEmotionRecordOnDataBase(int emotion){
+        EmotionRecord emotionRecord = new EmotionRecord(emotion);
+
+        db.collection("users").document(auth.getCurrentUser().getUid())
+                .collection("emotionRecord").document()
+                .set(emotionRecord)
+                .addOnCompleteListener((task)->{
+                   finish();
+                });
     }
 
     @Override
@@ -189,21 +220,18 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     private void writeAudioRecordDatabase(String downloadUri) {
-        DocumentReference ref = db.collection("audioFile").document();
+        String myID = auth.getCurrentUser().getUid();
+        DocumentReference ref = db.collection("users").document(myID)
+                .collection("audioFile").document();
         AudioRecord audioRecord = new AudioRecord(auth.getCurrentUser().getUid(), downloadUri, new ArrayList<>());
-        ref.set(audioRecord).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.d("upload!", "DocumentSnapshot successfully updated!");
-                finish();
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("upload!", "Error updating document", e);
-                    }
-                });
+        ref.set(audioRecord);
+
+        showEmotionDialog();
+    }
+
+    private void showEmotionDialog() {
+        binding.remainTimeView.setVisibility(View.GONE);
+        binding.emotionDialogLayout.setVisibility(View.VISIBLE);
     }
 
     public void updateRemainTimeView(long l) {

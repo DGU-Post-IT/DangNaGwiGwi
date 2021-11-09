@@ -2,9 +2,9 @@ package com.example.postit;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.postit.databinding.ActivityProfileBinding;
+import com.example.postit.model.ParentUser;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
 import com.firebase.ui.auth.IdpResponse;
@@ -26,13 +27,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity {
     private ActivityProfileBinding binding;
     private FirebaseFirestore db =FirebaseFirestore.getInstance();
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         bindLoginButton();
         bindSaveButton();
+        bindButtons();
     }
 
     private boolean checkLogin(){
@@ -55,6 +56,8 @@ public class ProfileActivity extends AppCompatActivity {
         binding.infoSaveButton.setOnClickListener((v)->{
             if(!checkLogin()) return;
             String name = binding.nameEditText.getText().toString();
+            String email = auth.getCurrentUser().getEmail();
+            int age = Integer.parseInt(binding.ageEditText.getText().toString());
             int checkedRadioButtonId = binding.sexSelectGroup.getCheckedRadioButtonId();
             int sex = -1;
             RadioButton br = (RadioButton) (findViewById(checkedRadioButtonId));
@@ -63,22 +66,13 @@ public class ProfileActivity extends AppCompatActivity {
             }else{
                 sex=2;
             }
-            int age = Integer.parseInt(binding.ageEditText.getText().toString());
-
-            Map<String,Object> user = new HashMap<>();
-            user.put("name", name);
-            user.put("sex", sex);
-            user.put("age", age);
-            user.put("email", FirebaseAuth.getInstance().getCurrentUser().getEmail());
-
-            String key = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            uploadData(user,key);
-
-
+            ParentUser parentUser = new ParentUser(name,email,age,sex);
+            String key = auth.getCurrentUser().getUid();
+            registerUserInfo(parentUser,key);
         });
     }
 
-    private void uploadData(Map<String, Object> user, String key) {
+    private void registerUserInfo(ParentUser user, String key) {
         db.collection("users").document(key)
                 .set(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -122,10 +116,14 @@ public class ProfileActivity extends AppCompatActivity {
                             }
                         });
             }
-
-
         });
 
+    }
+    private void bindButtons(){
+        binding.childrenRelationButton.setOnClickListener((v)->{
+            Intent intent = new Intent(this,ChildrenManageActivity.class);
+            startActivity(intent);
+        });
     }
 
     // 1102 로그인 결과 콜백 등록
@@ -151,6 +149,7 @@ public class ProfileActivity extends AppCompatActivity {
             // sign-in flow using the back button. Otherwise check
             // response.getError().getErrorCode() and handle the error.
             // ...
+            Toast.makeText(this,"로그인에 실패했습니다.",Toast.LENGTH_SHORT).show();
         }
     }
     //로그인 화면 시작
