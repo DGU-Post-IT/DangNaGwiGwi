@@ -30,6 +30,7 @@
         <activity android:name=".VoiceHistoryActivity"/>
         <activity android:name=".QuestionActivity"/>
         <activity android:name=".ChildrenManageActivity"/>
+        <activity android:name=".ImageActivity"/>
     </application>
 
 </manifest>

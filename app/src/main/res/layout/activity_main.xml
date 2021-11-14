@@ -1,190 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
+<layout>
 
-
-    <!-- 집민 - 211030 DB에 데이터 업로드/다운로드 기능 추가 -->
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="DB TEST : "
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText"
-            android:hint="db에 넣을 데이터의 키"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="upload"
-            android:id="@+id/upload_button"
-            />
-
-
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="가져올 아이템의 키"
-        android:id="@+id/query_key"
-        />
-    <Button
-        android:layout_width="70dp"
-        android:layout_height="40dp"
-        android:id="@+id/get_data_button"
-        android:text="get"
-        android:layout_marginRight="10dp"
-        />
-
-    <TextView
-        android:layout_width="170dp"
-        android:layout_height="40dp"
-        android:id="@+id/query_result_textview"
-        android:background="@color/black"
-        android:textColor="@color/white"
-        tools:text="result"
-        />
-
-    </LinearLayout>
-
-    <!--남현 - 211029 녹음기능 추가-->
-    <LinearLayout
-        android:id="@+id/recordLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <!--녹음내역들이 담길 리사이클러뷰-->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview"
-            android:layout_width="300dp"
-            android:layout_height="200dp"
-
-            app:layout_constraintBottom_toTopOf="@id/recordLayout"
-            />
-
-        <!--녹음 제어 레이아웃-->
-            <LinearLayout
+            <TextView
+                android:id="@+id/d_day_text_view"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <!--녹음 실행 및 중지 버튼-->
-                <ImageButton
-                    android:id="@+id/audioRecordImageBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:src="@drawable/ic_baseline_fiber_manual_record_24"/>
-
-                <TextView
-                    android:id="@+id/audioRecordText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="녹음 시작"
-                    android:textSize="20dp" />
-
-                ></LinearLayout>
-
-    </LinearLayout>
+                android:text="엄마 생신 d-20" />
 
 
-
-    <!-- 남현 - 211031 통화기록 검색기능 추가 -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="통화기록 검색 : "
-            android:textSize="15dp"
-            />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="번호를 입력하세요"
-            android:id="@+id/editText_callNumber"
-            android:layout_marginRight="20dp"
-            android:inputType="number"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="검색"
-            android:id="@+id/btn_call"/>
-    </LinearLayout>
+            <androidx.viewpager2.widget.ViewPager2
+                android:layout_width="match_parent"
+                app:layout_constraintTop_toBottomOf="@id/d_day_text_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="4:3"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView_call"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:scrollbars="vertical"
-        android:scrollbarFadeDuration = "0"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:scrollbarThumbVertical="@color/black"
-        android:scrollbarTrackVertical="@color/white"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:id="@+id/login_button"
-        android:text="login"
-        />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:id="@+id/voice_history_button"
-        android:text="voice record"
-        />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:id="@+id/question_activity_button"
-        android:text="question activity 볼륨주의"
-        />
-
-
-
-
-</LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
