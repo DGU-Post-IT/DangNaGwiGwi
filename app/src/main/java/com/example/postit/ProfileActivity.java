@@ -11,6 +11,9 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.postit.databinding.ActivityProfileBinding;
 import com.example.postit.model.ParentUser;
@@ -37,8 +40,10 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityProfileBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_profile);
+        binding.setLifecycleOwner(this);
+        ProfileViewModel vm = new ViewModelProvider(this).get(ProfileViewModel.class);
+        binding.setVm(vm);
         initViews();
 
 
@@ -68,27 +73,9 @@ public class ProfileActivity extends AppCompatActivity {
             }
             ParentUser parentUser = new ParentUser(name,email,age,sex);
             String key = auth.getCurrentUser().getUid();
-            registerUserInfo(parentUser,key);
+            binding.getVm().registerUserInfo(parentUser,key);
         });
     }
-
-    private void registerUserInfo(ParentUser user, String key) {
-        db.collection("users").document(key)
-                .set(user)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("upload!!", "DocumentSnapshot successfully written!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("upload!!", "Error writing document", e);
-                    }
-                });
-    }
-
 
     private void initViews() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -107,14 +94,7 @@ public class ProfileActivity extends AppCompatActivity {
             if(user==null){
                 loginStart();
             }else{
-                AuthUI.getInstance()
-                        .signOut(this)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            public void onComplete(@NonNull Task<Void> task) {
-                                binding.idTextView.setText("로그아웃 됨");
-                                binding.loginButton.setText("로그인 하기");
-                            }
-                        });
+                binding.getVm().logout();
             }
         });
 
@@ -144,6 +124,7 @@ public class ProfileActivity extends AppCompatActivity {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             binding.idTextView.setText(user.getEmail());
             binding.loginButton.setText("로그아웃 하기");
+            binding.getVm().checkPrivateInfo();
         } else {
             // Sign in failed. If response is null the user canceled the
             // sign-in flow using the back button. Otherwise check
@@ -162,6 +143,7 @@ public class ProfileActivity extends AppCompatActivity {
         Intent signInIntent = AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
+                .setIsSmartLockEnabled(false)
                 .build();
         signInLauncher.launch(signInIntent);
     }

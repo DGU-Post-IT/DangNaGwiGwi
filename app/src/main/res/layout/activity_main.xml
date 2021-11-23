@@ -1,190 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-
-    <!-- 집민 - 211030 DB에 데이터 업로드/다운로드 기능 추가 -->
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:background="@color/sky_blue"
+        tools:context=".MainActivity">
 
-        <TextView
+        <Button
+            android:id="@+id/my_page_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DB TEST : "
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            android:text="My"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
+        <TextView
+            android:id="@+id/week_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editText"
-            android:hint="db에 넣을 데이터의 키"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="upload"
-            android:id="@+id/upload_button"
-            />
+            android:layout_marginTop="18dp"
+            android:text="11월 둘째주"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/legend_list"
+            layout="@layout/legend_list"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/week_text_view" />
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/bg_main_panel"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/legend_list">
 
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="가져올 아이템의 키"
-        android:id="@+id/query_key"
-        />
-    <Button
-        android:layout_width="70dp"
-        android:layout_height="40dp"
-        android:id="@+id/get_data_button"
-        android:text="get"
-        android:layout_marginRight="10dp"
-        />
-
-    <TextView
-        android:layout_width="170dp"
-        android:layout_height="40dp"
-        android:id="@+id/query_result_textview"
-        android:background="@color/black"
-        android:textColor="@color/white"
-        tools:text="result"
-        />
-
-    </LinearLayout>
-
-    <!--남현 - 211029 녹음기능 추가-->
-    <LinearLayout
-        android:id="@+id/recordLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <!--녹음내역들이 담길 리사이클러뷰-->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview"
-            android:layout_width="300dp"
-            android:layout_height="200dp"
-
-            app:layout_constraintBottom_toTopOf="@id/recordLayout"
-            />
-
-        <!--녹음 제어 레이아웃-->
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <!--녹음 실행 및 중지 버튼-->
-                <ImageButton
-                    android:id="@+id/audioRecordImageBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:src="@drawable/ic_baseline_fiber_manual_record_24"/>
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/audioRecordText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="녹음 시작"
-                    android:textSize="20dp" />
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="요일"
+                    android:textColor="@color/white"
+                    android:textSize="22sp" />
 
-                ></LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="감정기록 파일"
+                    android:textColor="@color/white"
+                    android:textSize="22sp" />
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="감정"
+                    android:textColor="@color/white"
+                    android:textSize="22sp" />
+            </LinearLayout>
 
-
-
-    <!-- 남현 - 211031 통화기록 검색기능 추가 -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="통화기록 검색 : "
-            android:textSize="15dp"
-            />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="번호를 입력하세요"
-            android:id="@+id/editText_callNumber"
-            android:layout_marginRight="20dp"
-            android:inputType="number"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="검색"
-            android:id="@+id/btn_call"/>
-    </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/white" />
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView_call"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:scrollbars="vertical"
-        android:scrollbarFadeDuration = "0"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:scrollbarThumbVertical="@color/black"
-        android:scrollbarTrackVertical="@color/white"/>
+            <include
+                android:id="@+id/monday"
+                layout="@layout/item_day_emotion" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:id="@+id/login_button"
-        android:text="login"
-        />
+            <include
+                android:id="@+id/tuesday"
+                layout="@layout/item_day_emotion" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:id="@+id/voice_history_button"
-        android:text="voice record"
-        />
+            <include
+                android:id="@+id/wednesday"
+                layout="@layout/item_day_emotion" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:id="@+id/question_activity_button"
-        android:text="question activity 볼륨주의"
-        />
+            <include
+                android:id="@+id/thursday"
+                layout="@layout/item_day_emotion" />
+
+            <include
+                android:id="@+id/friday"
+                layout="@layout/item_day_emotion" />
+
+            <include
+                android:id="@+id/saturday"
+                layout="@layout/item_day_emotion" />
+
+            <include
+                android:id="@+id/sunday"
+                layout="@layout/item_day_emotion" />
 
 
-
-
-</LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

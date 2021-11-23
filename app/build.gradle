@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.postit"
-        minSdk 21
+        minSdk 26
         targetSdk 29
         versionCode 1
         versionName "1.0"
@@ -27,7 +27,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    viewBinding{
+    dataBinding{
         enabled true
     }
 }

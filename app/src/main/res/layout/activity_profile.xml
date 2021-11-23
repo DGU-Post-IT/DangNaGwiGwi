@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="vm"
+            type="com.example.postit.ProfileViewModel" />
+    </data>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -23,13 +32,22 @@
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="24sp"
-        tools:text="adfiyuhga" />
+        tools:text="@{vm.emailText}" />
 
     <Button
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:text="로그인하기" />
+        android:text="@{vm.buttonText}"
+        />
+
+    <LinearLayout
+        android:id="@+id/private_info_layout"
+        android:orientation="vertical"
+        android:visibility="@{!vm.privateInfoSaved &amp;&amp; vm.loggedIn ? View.VISIBLE : View.GONE, default=gone}"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
 
     <EditText
         android:id="@+id/name_edit_text"
@@ -69,9 +87,10 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="정보 저장"
+        android:text="정보 저장하기"
         android:id="@+id/info_save_button"
         />
+    </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"
@@ -83,3 +102,4 @@
 
 
 </LinearLayout>
+</layout>
