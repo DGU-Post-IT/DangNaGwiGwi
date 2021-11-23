@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/good_image_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:padding="5dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/good_text"
+                android:src="@drawable/ic_weather_good_shadow" />
+
+            <TextView
+                app:layout_constraintTop_toBottomOf="@id/good_image_view"
+                app:layout_constraintStart_toStartOf="@id/good_image_view"
+                app:layout_constraintEnd_toEndOf="@id/good_image_view"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/good_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="좋음"
+                android:textSize="12sp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/soso_image_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:padding="5dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/soso_text"
+                android:src="@drawable/ic_weather_soso_shadow" />
+
+            <TextView
+                app:layout_constraintTop_toBottomOf="@id/soso_image_view"
+                app:layout_constraintStart_toStartOf="@id/soso_image_view"
+                app:layout_constraintEnd_toEndOf="@id/soso_image_view"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/soso_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="무기력함"
+                android:textSize="12sp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/angry_image_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:padding="5dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/angry_text"
+                android:src="@drawable/ic_weather_angry_shadow" />
+
+            <TextView
+                app:layout_constraintTop_toBottomOf="@id/angry_image_view"
+                app:layout_constraintStart_toStartOf="@id/angry_image_view"
+                app:layout_constraintEnd_toEndOf="@id/angry_image_view"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/angry_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="화남"
+                android:textSize="12sp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/sad_image_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:padding="5dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/sad_text"
+                android:src="@drawable/ic_weather_sad_shadow" />
+
+            <TextView
+                app:layout_constraintTop_toBottomOf="@id/sad_image_view"
+                app:layout_constraintStart_toStartOf="@id/sad_image_view"
+                app:layout_constraintEnd_toEndOf="@id/sad_image_view"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/sad_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="슬픔"
+                android:textSize="12sp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>
+</layout>

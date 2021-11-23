@@ -8,14 +8,18 @@
         <entry key="..\:/Users/CNH/AndroidStudioProjects/postIT/app/src/main/res/drawable/ic_baseline_fiber_manual_record_24.xml" value="0.2712962962962963" />
         <entry key="..\:/Users/CNH/AndroidStudioProjects/postIT/app/src/main/res/layout/activity_main.xml" value="0.12545289855072464" />
         <entry key="..\:/Users/CNH/AndroidStudioProjects/postIT/app/src/main/res/layout/item_audio.xml" value="0.32135416666666666" />
+        <entry key="app/src/main/res/drawable/bg_main_panel.xml" value="0.20462962962962963" />
+        <entry key="app/src/main/res/drawable/ic_weather_angry_shadow.xml" value="0.14270833333333333" />
         <entry key="app/src/main/res/layout/activity_children_manage.xml" value="0.18796296296296297" />
         <entry key="app/src/main/res/layout/activity_image.xml" value="0.1814814814814815" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2222222222222222" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.19907407407407407" />
         <entry key="app/src/main/res/layout/activity_question.xml" value="0.1265625" />
         <entry key="app/src/main/res/layout/activity_voice_history.xml" value="0.19537037037037036" />
         <entry key="app/src/main/res/layout/item_audio.xml" value="0.1265625" />
+        <entry key="app/src/main/res/layout/item_day_emotion.xml" value="0.165" />
         <entry key="app/src/main/res/layout/item_request.xml" value="0.18796296296296297" />
+        <entry key="app/src/main/res/layout/legend_list.xml" value="0.375" />
       </map>
     </option>
   </component>

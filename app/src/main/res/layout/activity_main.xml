@@ -1,40 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/sky_blue"
         tools:context=".MainActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
+        <Button
+            android:id="@+id/my_page_button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="My"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/week_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="11월 둘째주"
+            android:textColor="@color/black"
+            android:textSize="26sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/d_day_text_view"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="엄마 생신 d-20" />
+        <include
+            android:id="@+id/legend_list"
+            layout="@layout/legend_list"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/week_text_view" />
 
 
-            <androidx.viewpager2.widget.ViewPager2
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/bg_main_panel"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/legend_list">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                app:layout_constraintTop_toBottomOf="@id/d_day_text_view"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_height="0dp"
-                app:layout_constraintDimensionRatio="4:3"
-                />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="요일"
+                    android:textColor="@color/white"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="감정기록 파일"
+                    android:textColor="@color/white"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="감정"
+                    android:textColor="@color/white"
+                    android:textSize="22sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/white" />
 
 
+            <include
+                android:id="@+id/monday"
+                layout="@layout/item_day_emotion" />
+
+            <include
+                android:id="@+id/tuesday"
+                layout="@layout/item_day_emotion" />
+
+            <include
+                android:id="@+id/wednesday"
+                layout="@layout/item_day_emotion" />
+
+            <include
+                android:id="@+id/thursday"
+                layout="@layout/item_day_emotion" />
+
+            <include
+                android:id="@+id/friday"
+                layout="@layout/item_day_emotion" />
+
+            <include
+                android:id="@+id/saturday"
+                layout="@layout/item_day_emotion" />
+
+            <include
+                android:id="@+id/sunday"
+                layout="@layout/item_day_emotion" />
+
+
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

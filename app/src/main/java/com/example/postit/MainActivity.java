@@ -24,6 +24,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,9 +48,12 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
@@ -66,19 +71,64 @@ public class MainActivity extends AppCompatActivity {
     //파이어베이스 로그인 인증 객체
     private FirebaseAuth auth = FirebaseAuth.getInstance();
 
+    private MainViewModel model;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         checkStoragePermission();
+        model = new ViewModelProvider(this).get(MainViewModel.class);
 
         bindView();
+        initView();
+
+    }
+
+    void initView(){
+        binding.monday.weekDayTextView.setText("월");
+        binding.tuesday.weekDayTextView.setText("화");
+        binding.wednesday.weekDayTextView.setText("수");
+        binding.thursday.weekDayTextView.setText("목");
+        binding.friday.weekDayTextView.setText("금");
+        binding.saturday.weekDayTextView.setText("토");
+        binding.sunday.weekDayTextView.setText("일");
+
+        model.emotionMap.observe(this, new Observer<HashMap<DayOfWeek, Integer>>() {
+            @Override
+            public void onChanged(HashMap<DayOfWeek, Integer> hm) {
+                binding.monday.emotionIconImageView.setImageResource(EmotionIconUtil.getEmotionIcon(hm.getOrDefault(DayOfWeek.MONDAY,4)));
+                binding.tuesday.emotionIconImageView.setImageResource(EmotionIconUtil.getEmotionIcon(hm.getOrDefault(DayOfWeek.TUESDAY,4)));
+                binding.wednesday.emotionIconImageView.setImageResource(EmotionIconUtil.getEmotionIcon(hm.getOrDefault(DayOfWeek.WEDNESDAY,4)));
+                binding.thursday.emotionIconImageView.setImageResource(EmotionIconUtil.getEmotionIcon(hm.getOrDefault(DayOfWeek.THURSDAY,4)));
+                binding.friday.emotionIconImageView.setImageResource(EmotionIconUtil.getEmotionIcon(hm.getOrDefault(DayOfWeek.FRIDAY,4)));
+                binding.saturday.emotionIconImageView.setImageResource(EmotionIconUtil.getEmotionIcon(hm.getOrDefault(DayOfWeek.SATURDAY,4)));
+                binding.sunday.emotionIconImageView.setImageResource(EmotionIconUtil.getEmotionIcon(hm.getOrDefault(DayOfWeek.SUNDAY,4)));
+            }
+        });
+
+        model.audioFileMap.observe(this, new Observer<HashMap<String, String>>() {
+            @Override
+            public void onChanged(HashMap<String, String> hm) {
+                binding.monday.playButton.setTag(hm.getOrDefault(DayOfWeek.MONDAY.getDisplayName(TextStyle.SHORT, Locale.KOREA),null));
+                binding.tuesday.playButton.setTag(hm.getOrDefault(DayOfWeek.TUESDAY.getDisplayName(TextStyle.SHORT, Locale.KOREA),null));
+                binding.wednesday.playButton.setTag(hm.getOrDefault(DayOfWeek.WEDNESDAY.getDisplayName(TextStyle.SHORT, Locale.KOREA),null));
+                binding.thursday.playButton.setTag(hm.getOrDefault(DayOfWeek.THURSDAY.getDisplayName(TextStyle.SHORT, Locale.KOREA),null));
+                binding.friday.playButton.setTag(hm.getOrDefault(DayOfWeek.FRIDAY.getDisplayName(TextStyle.SHORT, Locale.KOREA),null));
+                binding.saturday.playButton.setTag(hm.getOrDefault(DayOfWeek.SATURDAY.getDisplayName(TextStyle.SHORT, Locale.KOREA),null));
+                binding.sunday.playButton.setTag(hm.getOrDefault(DayOfWeek.SUNDAY.getDisplayName(TextStyle.SHORT, Locale.KOREA),null));
+            }
+        });
 
     }
 
 
     private void bindView() {
+        binding.myPageButton.setOnClickListener((v)->{
+            Intent intent = new Intent(this,ProfileActivity.class);
+            startActivity(intent);
+        });
 
     }
 

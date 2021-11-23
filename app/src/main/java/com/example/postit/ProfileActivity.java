@@ -94,14 +94,6 @@ public class ProfileActivity extends AppCompatActivity {
             if(user==null){
                 loginStart();
             }else{
-//                AuthUI.getInstance()
-//                        .signOut(this)
-//                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                            public void onComplete(@NonNull Task<Void> task) {
-//                                binding.idTextView.setText("로그아웃 됨");
-//                                binding.loginButton.setText("로그인 하기");
-//                            }
-//                        });
                 binding.getVm().logout();
             }
         });
