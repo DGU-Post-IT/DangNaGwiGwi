@@ -1,105 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-    <data>
-        <import type="android.view.View"/>
-        <variable
-            name="vm"
-            type="com.example.postit.ProfileViewModel" />
-    </data>
-
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/light_pink">
 
+    <EditText
+        android:id="@+id/id_edit_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="6:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/id_input_text"
+        android:hint="아이디(이메일)"
+        android:inputType="textEmailAddress"
+        android:paddingStart="16dp"
+        android:textSize="20sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="내 ID 코드"
-        android:textColor="@color/black"
-        android:textSize="22sp" />
-
-    <TextView
-        android:id="@+id/id_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@color/black"
-        android:hint="로그인 되어 있지 않음"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        tools:text="@{vm.emailText}" />
+    <EditText
+        android:id="@+id/password_edit_text"
+        app:layout_constraintDimensionRatio="6:1"
+        app:layout_constraintEnd_toEndOf="@id/id_edit_text"
+        app:layout_constraintStart_toStartOf="@id/id_edit_text"
+        app:layout_constraintTop_toBottomOf="@id/id_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/id_input_text"
+        android:hint="비밀번호"
+        android:inputType="textPassword"
+        android:paddingStart="16dp"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/login_button"
+        app:layout_constraintDimensionRatio="6:1"
+        app:layout_constraintEnd_toEndOf="@id/password_edit_text"
+        app:layout_constraintStart_toStartOf="@id/password_edit_text"
+        app:layout_constraintTop_toBottomOf="@id/password_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/radius_button"
+        android:text="로그인"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/signUpButton"
+        app:layout_constraintEnd_toEndOf="@id/login_button"
+        app:layout_constraintStart_toStartOf="@id/login_button"
+        app:layout_constraintTop_toBottomOf="@id/login_button"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:text="@{vm.buttonText}"
-        />
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:text="회원가입" />
 
     <LinearLayout
-        android:id="@+id/private_info_layout"
+        android:id="@+id/progress_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.8"
+        android:background="@color/gray"
+        android:gravity="center"
         android:orientation="vertical"
-        android:visibility="@{!vm.privateInfoSaved &amp;&amp; vm.loggedIn ? View.VISIBLE : View.GONE, default=gone}"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
+        android:visibility="gone">
 
-    <EditText
-        android:id="@+id/name_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:elevation="1dp"
-        android:hint="이름을 입력" />
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/sex_select_group"
-        >
-        <RadioButton
+        <ProgressBar
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="남성"
-            android:tag="m"
-            />
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="여성"
-            android:tag="f"
-            />
+            android:layout_height="wrap_content" />
 
-    </RadioGroup>
-
-    <EditText
-        android:layout_width="100dp"
-        android:layout_height="60dp"
-        android:id="@+id/age_edit_text"
-        android:inputType="number"
-        android:hint="나이를 입력"
-        />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="정보 저장하기"
-        android:id="@+id/info_save_button"
-        />
     </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="자녀 관계 보기"
-        android:id="@+id/children_relation_button"
-        />
 
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
