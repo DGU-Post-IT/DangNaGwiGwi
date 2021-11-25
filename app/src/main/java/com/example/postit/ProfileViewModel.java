@@ -15,7 +15,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-
+//원래 있던 로그인화면(안 씀)
 public class ProfileViewModel extends ViewModel{
     public MutableLiveData<Boolean> loggedIn = new MutableLiveData<>(false);
     public MutableLiveData<Boolean> privateInfoSaved = new MutableLiveData<>(false);

@@ -84,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
         bindView();
         initView();
 
+        Intent intent = new Intent(this, QuestionActivity.class);
+        binding.questionButton.setOnClickListener((v)->{
+            startActivity(intent);
+        });
     }
 
     void initView(){
