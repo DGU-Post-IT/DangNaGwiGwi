@@ -150,20 +150,33 @@ public class QuestionActivity extends AppCompatActivity {
             recorder.start();
             isRecording = true;
 
-            ct = new CountDownTimer(30 * 1000, 1000) {
-                @Override
-                public void onTick(long l) {
-                    updateRemainTimeView(l);
-                }
+            //버튼 visibility 활성화
+            binding.stopButton.setVisibility(View.VISIBLE);
 
+//            ct = new CountDownTimer(30 * 1000, 1000) {
+//                @Override
+//                public void onTick(long l) {
+//                    updateRemainTimeView(l);
+//                }
+//
+//                @Override
+//                public void onFinish() {
+//                    stopRecorder();
+//                    uploadFileWithUri(Uri.fromFile(cacheFile));
+//                }
+//            };
+//
+//            ct.start();
+            
+            //버튼 클릭하면 녹음 멈추게
+            binding.stopButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onFinish() {
+                public void onClick(View view) {
                     stopRecorder();
                     uploadFileWithUri(Uri.fromFile(cacheFile));
                 }
-            };
+            });
 
-            ct.start();
         } catch (IllegalStateException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -231,6 +244,7 @@ public class QuestionActivity extends AppCompatActivity {
 
     private void showEmotionDialog() {
         binding.remainTimeView.setVisibility(View.GONE);
+        binding.stopButton.setVisibility(View.GONE);
         binding.emotionDialogLayout.setVisibility(View.VISIBLE);
     }
 
