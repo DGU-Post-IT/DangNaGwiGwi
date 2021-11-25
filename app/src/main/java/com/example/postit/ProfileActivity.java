@@ -26,6 +26,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -152,7 +153,26 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 });
     }
-    
+
+    void getFcmToken() {
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+
+                        Log.d(TAG, token);
+                        Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
     //알림 시간 설정하는 Timepicker 설정
     void timepicker_set(){
         final TimePicker picker=(TimePicker)findViewById(R.id.timePicker);
@@ -291,8 +311,8 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
-    
-    
+
+
 //
 //    private void bindSaveButton() {
 //        binding.infoSaveButton.setOnClickListener((v)->{
