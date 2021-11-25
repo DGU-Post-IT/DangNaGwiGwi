@@ -46,10 +46,6 @@ public class VoiceHistoryActivity extends AppCompatActivity {
         getListOfVoiceHistory();
 
 
-
-
-
-
     }
 
     private void initRecyclerView() {
