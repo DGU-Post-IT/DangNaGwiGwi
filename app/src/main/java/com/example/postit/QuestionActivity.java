@@ -109,6 +109,24 @@ public class QuestionActivity extends AppCompatActivity {
     public void startMediaPlayer(int questionId) {
 
         player = MediaPlayer.create(this, QuestionIdUtil.getAudioId(questionId));
+        switch (questionId){
+            case 0:
+                binding.tvQuestion.setText("1번질문 \n아래 버튼을 눌러주세요!");
+                break;
+            case 1:
+                binding.tvQuestion.setText("2번질문 \n아래 버튼을 눌러주세요!");
+                break;
+            case 2:
+                binding.tvQuestion.setText("3번질문 \n아래 버튼을 눌러주세요!");
+                break;
+            case 3:
+                binding.tvQuestion.setText("4번질문 \n아래 버튼을 눌러주세요!");
+                break;
+            case 4:
+                binding.tvQuestion.setText("5번질문 \n아래 버튼을 눌러주세요!");
+                break;
+        }
+
         player.setOnCompletionListener((pl) -> {
 
             Log.d("tag", "play complete");
@@ -251,13 +269,13 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     private void showEmotionDialog() {
-        binding.remainTimeView.setVisibility(View.GONE);
+        binding.tvQuestion.setVisibility(View.GONE);
         binding.stopButton.setVisibility(View.GONE);
         binding.emotionDialogLayout.setVisibility(View.VISIBLE);
     }
 
     public void updateRemainTimeView(long l) {
-        binding.remainTimeView.setText(String.valueOf(l)+"밀리초 후 녹음 종료 및 업로드 시작");
+        binding.tvQuestion.setText(String.valueOf(l)+"밀리초 후 녹음 종료 및 업로드 시작");
     }
 
 
