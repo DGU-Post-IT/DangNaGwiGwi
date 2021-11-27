@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/light_pink">
+    android:background="@color/sky_blue">
 
     <EditText
         android:id="@+id/id_edit_text"
@@ -48,9 +48,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/radius_button"
+        android:backgroundTint="@color/blue_green"
         android:text="로그인"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
+
         android:textSize="20sp" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -102,6 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:id="@+id/button_notification"
+            android:backgroundTint="@color/blue_green"
             android:layout_gravity="center"/>
 
 

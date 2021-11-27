@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="감정기록 파일"
+                    android:text="질문 듣기 / 답변 듣기"
                     android:textColor="@color/white"
                     android:textSize="22sp" />
 
@@ -101,7 +101,7 @@
 
             <include
                 android:id="@+id/monday"
-                layout="@layout/item_day_emotion" />
+                layout="@layout/item_day_emotion"/>
 
             <include
                 android:id="@+id/tuesday"
