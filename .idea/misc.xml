@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/CNH/AndroidStudioProjects/DangNaGwiGwi/app/src/main/res/drawable/bg_main_panel.xml" value="0.24635416666666668" />
+        <entry key="..\:/Users/CNH/AndroidStudioProjects/DangNaGwiGwi/app/src/main/res/drawable/radius_button.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/CNH/AndroidStudioProjects/DangNaGwiGwi/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/CNH/AndroidStudioProjects/DangNaGwiGwi/app/src/main/res/layout/activity_profile.xml" value="0.2546875" />
         <entry key="..\:/Users/CNH/AndroidStudioProjects/DangNaGwiGwi/app/src/main/res/layout/activity_question.xml" value="0.2109375" />
         <entry key="..\:/Users/CNH/AndroidStudioProjects/DangNaGwiGwi/app/src/main/res/layout/item_audio.xml" value="0.32135416666666666" />
+        <entry key="..\:/Users/CNH/AndroidStudioProjects/DangNaGwiGwi/app/src/main/res/layout/item_day_emotion.xml" value="0.3429454170957775" />
         <entry key="..\:/Users/CNH/AndroidStudioProjects/postIT/app/src/main/res/drawable/ic_baseline_fiber_manual_record_24.xml" value="0.2712962962962963" />
         <entry key="..\:/Users/CNH/AndroidStudioProjects/postIT/app/src/main/res/layout/activity_main.xml" value="0.12545289855072464" />
         <entry key="..\:/Users/CNH/AndroidStudioProjects/postIT/app/src/main/res/layout/item_audio.xml" value="0.32135416666666666" />

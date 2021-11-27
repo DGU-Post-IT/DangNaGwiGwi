@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="50dp">
 
     <TextView
         android:id="@+id/week_day_text_view"
@@ -17,11 +17,12 @@
         app:layout_constraintEnd_toStartOf="@id/play_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="월" />
+        tools:text="월"
+        android:textColor="@color/white"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:id="@+id/play_layout"
         app:layout_constraintTop_toTopOf="@id/week_day_text_view"
         app:layout_constraintBottom_toBottomOf="@id/week_day_text_view"
@@ -30,20 +31,21 @@
         android:orientation="horizontal"
         >
 
-        <TextView
-            android:id="@+id/play_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:gravity="center"
-            android:textSize="21sp"
-            android:text="기록듣기" />
+        <ImageButton
+            android:id="@+id/play_button_question"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_baseline_play_circle_filled_24"
+            android:scaleType="fitCenter"
+            android:layout_marginRight="20dp"/>
 
         <ImageButton
             android:id="@+id/play_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:src="@drawable/ic_baseline_play_circle_filled_24" />
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_baseline_play_circle_filled_24"
+            android:scaleType="fitCenter"
+            />
 
     </LinearLayout>
 

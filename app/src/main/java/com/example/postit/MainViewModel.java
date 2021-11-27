@@ -50,7 +50,7 @@ public class MainViewModel extends AndroidViewModel {
     void fetchWeeklyData() {
         if (auth.getCurrentUser() == null) return;
         HashMap<String,String> audioMap = new HashMap<>();
-        HashMap<DayOfWeek,Integer> emotionMap = new HashMap<>();
+        HashMap<DayOfWeek,Integer> emotionMap2 = new HashMap<>();
 
         Log.d("mainviewmodel", "fetch data" + "");
         db.collection("users").document(auth.getCurrentUser().getUid())
@@ -67,10 +67,10 @@ public class MainViewModel extends AndroidViewModel {
                             LocalDate localDate = er.getTime().toInstant() // Date -> Instant
                                     .atZone(ZoneId.systemDefault()) // Instant -> ZonedDateTime
                                     .toLocalDate();
-                            emotionMap.put(localDate.getDayOfWeek(),er.getEmotion());
+                            emotionMap2.put(localDate.getDayOfWeek(),er.getEmotion());
 
                         }
-                        this.emotionMap.setValue(emotionMap);
+                        this.emotionMap.setValue(emotionMap2);
                     }
                 });
         db.collection("users").document(auth.getCurrentUser().getUid())
