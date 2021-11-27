@@ -84,7 +84,10 @@ public class MainActivity extends AppCompatActivity {
         bindView();
         initView();
 
+        int today_idx =(int)((KoreanTime.koreaToday()) % 5);
+        Log.d("TAG", today_idx+"");
         Intent intent = new Intent(this, QuestionActivity.class);
+        intent.putExtra("questionId",today_idx);
         binding.questionButton.setOnClickListener((v)->{
             startActivity(intent);
         });

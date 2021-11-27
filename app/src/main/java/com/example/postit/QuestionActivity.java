@@ -52,6 +52,8 @@ public class QuestionActivity extends AppCompatActivity {
     FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
+    int questionId;
+
     boolean isRecording = false;
 
     @Override
@@ -59,6 +61,7 @@ public class QuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityQuestionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        questionId = getIntent().getIntExtra("questionId",-1);
 
         bindEmotionDialog();
 
@@ -95,12 +98,17 @@ public class QuestionActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        if(questionId==-1){
+            finish();
+        }
+
         //시작되면 질문하고 자동으로 녹음 시행, 그리고 업로드까지
-        startMediaPlayer();
+        startMediaPlayer(questionId);
     }
 
-    public void startMediaPlayer() {
-        player = MediaPlayer.create(this, R.raw.good_morning);
+    public void startMediaPlayer(int questionId) {
+
+        player = MediaPlayer.create(this, QuestionIdUtil.getAudioId(questionId));
         player.setOnCompletionListener((pl) -> {
 
             Log.d("tag", "play complete");
@@ -223,7 +231,7 @@ public class QuestionActivity extends AppCompatActivity {
         String myID = auth.getCurrentUser().getUid();
         DocumentReference ref = db.collection("users").document(myID)
                 .collection("audioFile").document();
-        AudioRecord audioRecord = new AudioRecord(auth.getCurrentUser().getUid(), downloadUri, new ArrayList<>());
+        AudioRecord audioRecord = new AudioRecord(auth.getCurrentUser().getUid(), downloadUri, new ArrayList<>(),questionId);
         ref.set(audioRecord);
 
         showEmotionDialog();
