@@ -12,13 +12,23 @@ public class AudioRecord {
     private Date time;
     private String audioLocation;
     private ArrayList<String> evalutaion;
+    private int questionId;
+
+    public int getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(int questionId) {
+        this.questionId = questionId;
+    }
 
     AudioRecord(){}
 
-    public AudioRecord(String speakerID, String audioLocation, ArrayList<String> evalutaion) {
+    public AudioRecord(String speakerID, String audioLocation, ArrayList<String> evalutaion, int questionId) {
         this.speakerID = speakerID;
         this.audioLocation = audioLocation;
         this.evalutaion = evalutaion;
+        this.questionId = questionId;
     }
 
     public String getSpeakerID() {
