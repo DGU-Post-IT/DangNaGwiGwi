@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/id_edit_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="6:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/id_input_text"
+        android:hint="아이디(이메일)"
+        android:inputType="textEmailAddress"
+        android:paddingStart="16dp"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/password_edit_text"
+        app:layout_constraintDimensionRatio="6:1"
+        app:layout_constraintEnd_toEndOf="@id/id_edit_text"
+        app:layout_constraintStart_toStartOf="@id/id_edit_text"
+        app:layout_constraintTop_toBottomOf="@id/id_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/id_input_text"
+        android:hint="비밀번호"
+        android:inputType="textPassword"
+        android:paddingStart="16dp"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/login_button"
+        app:layout_constraintDimensionRatio="6:1"
+        app:layout_constraintEnd_toEndOf="@id/password_edit_text"
+        app:layout_constraintStart_toStartOf="@id/password_edit_text"
+        app:layout_constraintTop_toBottomOf="@id/password_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/blue_green"
+        android:text="회원 등록"
+        android:textColor="@color/white"
+
+        android:textSize="20sp" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

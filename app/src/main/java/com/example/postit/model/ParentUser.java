@@ -2,23 +2,34 @@ package com.example.postit.model;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ParentUser {
     String name;
     String email;
     ArrayList<String> follower;
     ArrayList<String> requested;
-    int age;
+    Date birthdate;
     int sex;
+    String fcm;
+
+    public String getFcm() {
+        return fcm;
+    }
+
+    public void setFcm(String fcm) {
+        this.fcm = fcm;
+    }
 
     public ParentUser() {
+        this.sex =0;
     }
 
 
-    public ParentUser(String name, String email, int age, int sex) {
+    public ParentUser(String name, String email, Date birthdate, int sex) {
         this.name = name;
         this.email = email;
-        this.age = age;
+        this.birthdate = birthdate;
         this.sex = sex;
         this.follower = new ArrayList<>();
         this.requested = new ArrayList<>();
@@ -56,12 +67,12 @@ public class ParentUser {
         this.requested = requested;
     }
 
-    public int getAge() {
-        return age;
+    public Date getBirthdate() {
+        return birthdate;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
     }
 
     public int getSex() {
