@@ -271,6 +271,9 @@ public class QuestionActivity extends AppCompatActivity {
     private void showEmotionDialog() {
         binding.tvQuestion.setVisibility(View.GONE);
         binding.stopButton.setVisibility(View.GONE);
+
+        MediaPlayer player_feeling_check = MediaPlayer.create(this, R.raw.feeling_check);
+        player_feeling_check.start();
         binding.emotionDialogLayout.setVisibility(View.VISIBLE);
     }
 
