@@ -53,13 +53,22 @@ public class ProfileActivity extends AppCompatActivity {
 
         bindLoginButton();
         bindSignUpButton();
+        bindInfoRegisterButton();
         timepicker_set();
 
     }
 
+    private void bindInfoRegisterButton() {
+        binding.registerUserInfoButton.setOnClickListener((v)->{
+            Intent intent = new Intent(this, MyInfoActivity.class);
+            startActivity(intent);
+        });
+    }
+
     private void bindSignUpButton() {
         binding.signUpButton.setOnClickListener((v) -> {
-
+            Intent intent = new Intent(this, SignUpActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -71,20 +80,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void initViews() {
         FirebaseUser user = auth.getCurrentUser();
-        if (user == null) {
-            binding.idEditText.setText(null);
-            binding.idEditText.setEnabled(true);
-            binding.passwordEditText.setEnabled(true);
-            binding.idEditText.setText("");
-            binding.passwordEditText.setText("");
-            binding.loginButton.setText("로그인하기");
-        } else {
-            binding.idEditText.setText(user.getEmail());
-            binding.idEditText.setEnabled(false);
-            binding.passwordEditText.setText("******");
-            binding.passwordEditText.setEnabled(false);
-            binding.loginButton.setText("로그아웃하기");
-        }
+        updateUI(user);
     }
 
     private boolean checkLogin() {
@@ -98,6 +94,8 @@ public class ProfileActivity extends AppCompatActivity {
             binding.idEditText.setEnabled(true);
             binding.passwordEditText.setEnabled(true);
             binding.idEditText.setText("");
+            binding.signUpButton.setVisibility(View.VISIBLE);
+            binding.registerUserInfoButton.setVisibility(View.GONE);
             binding.passwordEditText.setText("");
             binding.loginButton.setText("로그인하기");
         } else {
@@ -105,6 +103,8 @@ public class ProfileActivity extends AppCompatActivity {
             binding.idEditText.setEnabled(false);
             binding.passwordEditText.setText("******");
             binding.passwordEditText.setEnabled(false);
+            binding.registerUserInfoButton.setVisibility(View.VISIBLE);
+            binding.signUpButton.setVisibility(View.GONE);
             binding.loginButton.setText("로그아웃하기");
         }
     }

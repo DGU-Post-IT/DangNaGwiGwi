@@ -57,6 +57,8 @@
         </receiver>
 
         <receiver android:name=".AlarmReceiver" />
+        <activity android:name=".SignUpActivity"/>
+        <activity android:name=".MyInfoActivity"/>
 
 
     </application>

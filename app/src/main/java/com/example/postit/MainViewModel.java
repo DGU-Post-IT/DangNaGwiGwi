@@ -36,6 +36,13 @@ public class MainViewModel extends AndroidViewModel {
 
     MutableLiveData<HashMap<String,String>> audioFileMap = new MutableLiveData<HashMap<String, String>>(new HashMap<>());
     MutableLiveData<HashMap<DayOfWeek,Integer>> emotionMap = new MutableLiveData<HashMap<DayOfWeek, Integer>>(new HashMap<>());
+    MutableLiveData<Integer> mondayQuestionId = new MutableLiveData<>(-1);
+    MutableLiveData<Integer> tuesdayQuestionId = new MutableLiveData<>(-1);
+    MutableLiveData<Integer> wednesdayQuestionId = new MutableLiveData<>(-1);
+    MutableLiveData<Integer> thursdayQuestionId = new MutableLiveData<>(-1);
+    MutableLiveData<Integer> fridayQuestionId = new MutableLiveData<>(-1);
+    MutableLiveData<Integer> saturdayQuestionId = new MutableLiveData<>(-1);
+    MutableLiveData<Integer> sundayQuestionId = new MutableLiveData<>(-1);
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -49,8 +56,6 @@ public class MainViewModel extends AndroidViewModel {
 
     void fetchWeeklyData() {
         if (auth.getCurrentUser() == null) return;
-        HashMap<String,String> audioMap = new HashMap<>();
-        HashMap<DayOfWeek,Integer> emotionMap2 = new HashMap<>();
 
         Log.d("mainviewmodel", "fetch data" + "");
         db.collection("users").document(auth.getCurrentUser().getUid())
@@ -60,6 +65,8 @@ public class MainViewModel extends AndroidViewModel {
                 .orderBy("time", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener((task) -> {
+
+                    HashMap<DayOfWeek,Integer> emotionMap2 = new HashMap<>();
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot doc :
                                 task.getResult()) {
@@ -67,6 +74,7 @@ public class MainViewModel extends AndroidViewModel {
                             LocalDate localDate = er.getTime().toInstant() // Date -> Instant
                                     .atZone(ZoneId.systemDefault()) // Instant -> ZonedDateTime
                                     .toLocalDate();
+
                             emotionMap2.put(localDate.getDayOfWeek(),er.getEmotion());
 
                         }
@@ -80,6 +88,8 @@ public class MainViewModel extends AndroidViewModel {
                 .orderBy("time", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener((task) -> {
+
+                    HashMap<String,String> audioMap = new HashMap<>();
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot doc :
                                 task.getResult()) {
@@ -87,9 +97,25 @@ public class MainViewModel extends AndroidViewModel {
                             LocalDate localDate = af.getTime().toInstant() // Date -> Instant
                                     .atZone(ZoneId.systemDefault()) // Instant -> ZonedDateTime
                                     .toLocalDate();
-                            audioMap.put(localDate.getDayOfWeek().getDisplayName(TextStyle.SHORT,Locale.KOREA),af.getAudioLocation());
 
-                            Log.d("mainviewmodel", localDate.getDayOfWeek().getDisplayName(TextStyle.SHORT,Locale.KOREA));
+                            Log.d("mainviewmodel",localDate.toString());
+                            DayOfWeek dow = localDate.getDayOfWeek();
+                            if(dow==DayOfWeek.MONDAY){
+                                mondayQuestionId.setValue(af.getQuestionId());
+                            }else if(dow==DayOfWeek.TUESDAY){
+                                tuesdayQuestionId.setValue(af.getQuestionId());
+                            }else if(dow==DayOfWeek.WEDNESDAY){
+                                wednesdayQuestionId.setValue(af.getQuestionId());
+                            }else if(dow==DayOfWeek.THURSDAY){
+                                thursdayQuestionId.setValue(af.getQuestionId());
+                            }else if(dow==DayOfWeek.FRIDAY){
+                                fridayQuestionId.setValue(af.getQuestionId());
+                            }else if(dow==DayOfWeek.SATURDAY){
+                                saturdayQuestionId.setValue(af.getQuestionId());
+                            }else if(dow==DayOfWeek.SUNDAY){
+                                sundayQuestionId.setValue(af.getQuestionId());
+                            }
+                            audioMap.put(localDate.getDayOfWeek().getDisplayName(TextStyle.SHORT,Locale.KOREA),af.getAudioLocation());
                         }
                         audioFileMap.setValue(audioMap);
                     }
