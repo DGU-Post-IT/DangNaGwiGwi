@@ -61,8 +61,8 @@ public class QuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityQuestionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        questionId = getIntent().getIntExtra("questionId",-1);
-
+        //questionId = getIntent().getIntExtra("questionId",-1);
+        questionId = (int) ((KoreanTime.koreaToday()) % 5);
         bindEmotionDialog();
 
     }
@@ -90,6 +90,7 @@ public class QuestionActivity extends AppCompatActivity {
                 .collection("emotionRecord").document()
                 .set(emotionRecord)
                 .addOnCompleteListener((task)->{
+                    //앱 꺼지기 전에 밤인사 추가하기!!
                    finish();
                 });
     }
