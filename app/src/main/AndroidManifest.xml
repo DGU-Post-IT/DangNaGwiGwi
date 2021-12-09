@@ -31,7 +31,12 @@
         </activity>
         <activity android:name=".ProfileActivity"/>
         <activity android:name=".VoiceHistoryActivity"/>
-        <activity android:name=".QuestionActivity"/>
+        <activity android:name=".QuestionActivity">
+            <intent-filter>
+                <action android:name="question_activity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".ChildrenManageActivity"/>
         <activity android:name=".ImageActivity"/>
 

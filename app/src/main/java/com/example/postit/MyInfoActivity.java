@@ -110,6 +110,7 @@ public class MyInfoActivity extends AppCompatActivity {
                 birthYear = Integer.parseInt(binding.birthYear.getText().toString());
                 birthMonth = Integer.parseInt(binding.birthMonth.getText().toString());
                 birthDay = Integer.parseInt(binding.birthDay.getText().toString());
+                if(birthMonth<1||birthMonth>12||birthDay<1||birthDay>31) throw new NumberFormatException();
             } catch (NumberFormatException e) {
                 Toast.makeText(this, "올바른 생년월일을 입력해주세요.", Toast.LENGTH_SHORT).show();
                 return;
