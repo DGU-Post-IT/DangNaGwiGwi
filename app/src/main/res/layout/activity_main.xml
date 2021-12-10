@@ -1,133 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+
+
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/sky_blue"
-        tools:context=".MainActivity">
-
+        tools:context=".MainActivity"
+        android:orientation="vertical">
         <Button
             android:id="@+id/my_page_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="My"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/question_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Question(삭제예정)"
-            android:textSize="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
+            />
         <TextView
-            android:id="@+id/week_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:text="11월 둘째주"
-            android:textColor="@color/black"
-            android:textSize="26sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <include
-            android:id="@+id/legend_list"
-            layout="@layout/legend_list"
-            android:layout_width="250dp"
+            android:text="효도"
+            />
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/week_text_view" />
-
+            android:text="이번주 나의 기분은?"/>
 
         <LinearLayout
+            android:id="@+id/layout_weeklycheck"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="14dp"
-            android:background="@drawable/bg_main_panel"
-            android:orientation="vertical"
-            android:paddingTop="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/legend_list">
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@color/pink">
+            <ImageView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="요일"
-                    android:textColor="@color/white"
-                    android:textSize="22sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="질문 듣기 / 답변 듣기"
-                    android:textColor="@color/white"
-                    android:textSize="22sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="감정"
-                    android:textColor="@color/white"
-                    android:textSize="22sp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="3dp"
-                android:background="@color/white" />
-
-
-            <include
-                android:id="@+id/sunday"
-                layout="@layout/item_day_emotion" />
-
-            <include
-                android:id="@+id/monday"
-                layout="@layout/item_day_emotion"/>
-
-            <include
-                android:id="@+id/tuesday"
-                layout="@layout/item_day_emotion" />
-
-            <include
-                android:id="@+id/wednesday"
-                layout="@layout/item_day_emotion" />
-
-            <include
-                android:id="@+id/thursday"
-                layout="@layout/item_day_emotion" />
-
-            <include
-                android:id="@+id/friday"
-                layout="@layout/item_day_emotion" />
-
-            <include
-                android:id="@+id/saturday"
-                layout="@layout/item_day_emotion" />
-
-
+                android:src="@drawable/ic_baseline_fiber_manual_record_24"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="기록보기"
+                android:layout_gravity="center"/>
         </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_nagging"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@color/blue_green">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_fiber_manual_record_24"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="잔소리하기"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_game"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@color/pink">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_fiber_manual_record_24"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="게임하기"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
 </layout>

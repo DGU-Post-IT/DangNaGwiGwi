@@ -39,6 +39,7 @@
         </activity>
         <activity android:name=".ChildrenManageActivity"/>
         <activity android:name=".ImageActivity"/>
+        <activity android:name=".WeeklyCheckActivity"/>
 
         <service
             android:name=".MyFirebaseMessagingService"
