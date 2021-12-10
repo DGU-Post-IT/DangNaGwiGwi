@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/CNH/AndroidStudioProjects/DangNaGwiGwi/app/src/main/res/font/dx_font.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/CNH/AndroidStudioProjects/DangNaGwiGwi/app/src/main/res/layout/activity_game.xml" value="0.20989583333333334" />
         <entry key="..\:/Users/CNH/AndroidStudioProjects/DangNaGwiGwi/app/src/main/res/layout/activity_main.xml" value="0.25833333333333336" />
         <entry key="..\:/Users/CNH/AndroidStudioProjects/DangNaGwiGwi/app/src/main/res/layout/activity_nagging.xml" value="0.20989583333333334" />
+        <entry key="..\:/Users/CNH/AndroidStudioProjects/DangNaGwiGwi/app/src/main/res/layout/activity_question.xml" value="0.22" />
         <entry key="..\:/Users/CNH/AndroidStudioProjects/DangNaGwiGwi/app/src/main/res/layout/activity_weeklycheck.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/CNH/AndroidStudioProjects/DangNaGwiGwi/app/src/main/res/layout/item_audio.xml" value="0.32135416666666666" />
         <entry key="..\:/Users/CNH/AndroidStudioProjects/postIT/app/src/main/res/drawable/ic_baseline_fiber_manual_record_24.xml" value="0.2712962962962963" />

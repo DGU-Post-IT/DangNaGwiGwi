@@ -270,12 +270,15 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     private void showEmotionDialog() {
+        binding.tvInfo1.setVisibility(View.GONE);
         binding.tvQuestion.setVisibility(View.GONE);
         binding.stopButton.setVisibility(View.GONE);
+        binding.cvQuestion.setVisibility(View.GONE);
 
         MediaPlayer player_feeling_check = MediaPlayer.create(this, R.raw.feeling_check);
         player_feeling_check.start();
-        binding.emotionDialogLayout.setVisibility(View.VISIBLE);
+        binding.tvInfo2.setVisibility(View.VISIBLE);
+        binding.cvEmotioncheck.setVisibility(View.VISIBLE);
     }
 
     public void updateRemainTimeView(long l) {
