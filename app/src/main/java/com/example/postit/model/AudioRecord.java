@@ -11,8 +11,8 @@ public class AudioRecord {
     @ServerTimestamp
     private Date time;
     private String audioLocation;
-    private ArrayList<String> evalutaion;
     private int questionId;
+    private int emotion;
 
     public int getQuestionId() {
         return questionId;
@@ -24,10 +24,10 @@ public class AudioRecord {
 
     AudioRecord(){}
 
-    public AudioRecord(String speakerID, String audioLocation, ArrayList<String> evalutaion, int questionId) {
+    public AudioRecord(String speakerID, String audioLocation, int emotion, int questionId) {
         this.speakerID = speakerID;
         this.audioLocation = audioLocation;
-        this.evalutaion = evalutaion;
+        this.emotion = emotion;
         this.questionId = questionId;
     }
 
@@ -55,11 +55,11 @@ public class AudioRecord {
         this.audioLocation = audioLocation;
     }
 
-    public ArrayList<String> getEvalutaion() {
-        return evalutaion;
+    public int getEmotion() {
+        return emotion;
     }
 
-    public void setEvalutaion(ArrayList<String> evalutaion) {
-        this.evalutaion = evalutaion;
+    public void setEmotion(int emotion) {
+        this.emotion = emotion;
     }
 }
