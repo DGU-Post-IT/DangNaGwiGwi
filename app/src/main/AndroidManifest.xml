@@ -40,6 +40,8 @@
         <activity android:name=".ChildrenManageActivity"/>
         <activity android:name=".ImageActivity"/>
         <activity android:name=".WeeklyCheckActivity"/>
+        <activity android:name=".NaggingActivity"/>
+        <activity android:name=".GameActivity"/>
 
         <service
             android:name=".MyFirebaseMessagingService"
