@@ -7,7 +7,9 @@
         <entry key="..\:/Users/CNH/AndroidStudioProjects/DangNaGwiGwi/app/src/main/res/layout/activity_game.xml" value="0.20989583333333334" />
         <entry key="..\:/Users/CNH/AndroidStudioProjects/DangNaGwiGwi/app/src/main/res/layout/activity_main.xml" value="0.25833333333333336" />
         <entry key="..\:/Users/CNH/AndroidStudioProjects/DangNaGwiGwi/app/src/main/res/layout/activity_nagging.xml" value="0.20989583333333334" />
-        <entry key="..\:/Users/CNH/AndroidStudioProjects/DangNaGwiGwi/app/src/main/res/layout/activity_question.xml" value="0.22" />
+        <entry key="..\:/Users/CNH/AndroidStudioProjects/DangNaGwiGwi/app/src/main/res/layout/activity_profile.xml" value="0.5" />
+        <entry key="..\:/Users/CNH/AndroidStudioProjects/DangNaGwiGwi/app/src/main/res/layout/activity_question.xml" value="0.17145790554414783" />
+        <entry key="..\:/Users/CNH/AndroidStudioProjects/DangNaGwiGwi/app/src/main/res/layout/activity_sign_up.xml" value="0.20989583333333334" />
         <entry key="..\:/Users/CNH/AndroidStudioProjects/DangNaGwiGwi/app/src/main/res/layout/activity_weeklycheck.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/CNH/AndroidStudioProjects/DangNaGwiGwi/app/src/main/res/layout/item_audio.xml" value="0.32135416666666666" />
         <entry key="..\:/Users/CNH/AndroidStudioProjects/postIT/app/src/main/res/drawable/ic_baseline_fiber_manual_record_24.xml" value="0.2712962962962963" />
@@ -20,7 +22,6 @@
         <entry key="app/src/main/res/drawable/radius_sex_button.xml" value="0.10277777777777777" />
         <entry key="app/src/main/res/drawable/radius_sex_button_1.xml" value="0.10277777777777777" />
         <entry key="app/src/main/res/drawable/sex_selector.xml" value="0.10277777777777777" />
-        <entry key="app/src/main/res/drawable/table_bg.xml" value="0.30092592592592593" />
         <entry key="app/src/main/res/layout/activity_children_manage.xml" value="0.18796296296296297" />
         <entry key="app/src/main/res/layout/activity_image.xml" value="0.1814814814814815" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
@@ -29,10 +30,8 @@
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_user_info_register.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_voice_history.xml" value="0.19537037037037036" />
-        <entry key="app/src/main/res/layout/activity_weeklycheck.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/item_audio.xml" value="0.1265625" />
         <entry key="app/src/main/res/layout/item_day_emotion.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/item_record_history.xml" value="0.18958333333333333" />
         <entry key="app/src/main/res/layout/item_request.xml" value="0.18796296296296297" />
         <entry key="app/src/main/res/layout/legend_list.xml" value="0.375" />
       </map>
