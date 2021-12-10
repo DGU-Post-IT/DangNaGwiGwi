@@ -42,6 +42,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        binding.layoutNagging.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, NaggingActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.layoutGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
 
         initProportionView();
         binding.myPageButton.setOnClickListener((v) -> {
@@ -68,6 +85,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 }
-

@@ -9,47 +9,90 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
-        <Button
-            android:id="@+id/my_page_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="My" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="효도" />
+            <Button
+                android:id="@+id/my_page_button"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="MY"
+                android:textColor="@color/black"
+                android:layout_weight="1"
+                />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="이번주 나의 기분은?" />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="5"
+                android:src="@drawable/ic_check"
+                />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider_view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="#4D4D4D"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:layout_weight="0.5">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_check"
+                android:layout_weight="1"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="6"
+                android:layout_height="wrap_content"
+                android:text="이번주 나의 기분은?"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:textColor="#000000"/>
+
+        </LinearLayout>
 
         <androidx.cardview.widget.CardView
             android:layout_margin="14dp"
             app:cardElevation="20dp"
             app:cardCornerRadius="8dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_weight="1.6">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_gravity="center">
 
                 <com.example.postit.ProportionBarView
                     android:id="@+id/proportion_view"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="0dp"
                     android:layout_marginHorizontal="18dp"
                     android:elevation="2dp"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp" />
+                    android:layout_height="50dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="15dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginBottom="10dp"
                     android:gravity="center"
                     android:orientation="horizontal">
@@ -68,7 +111,9 @@
                         android:textColor="@color/black"
                         android:layout_marginEnd="14dp"
                         android:layout_marginStart="4dp"
-                        android:text="기쁨" />
+                        android:text="기쁨"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/dx_font"/>
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
@@ -82,7 +127,9 @@
                         android:textColor="@color/black"
                         android:layout_marginEnd="14dp"
                         android:layout_marginStart="4dp"
-                        android:text="무기력함" />
+                        android:text="무기력함"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/dx_font"/>
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
@@ -96,7 +143,9 @@
                         android:textColor="@color/black"
                         android:layout_marginEnd="14dp"
                         android:layout_marginStart="4dp"
-                        android:text="화남" />
+                        android:text="화남"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/dx_font"/>
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
@@ -108,9 +157,11 @@
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
                         android:textColor="@color/black"
-                        android:layout_marginEnd="14dp"
+                        android:layout_marginEnd="0dp"
                         android:layout_marginStart="4dp"
-                        android:text="슬픔" />
+                        android:text="슬픔"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/dx_font"/>
 
 
                 </LinearLayout>
@@ -123,58 +174,103 @@
         <LinearLayout
             android:id="@+id/layout_weeklycheck"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:background="@color/pink">
+            android:layout_height="0dp"
+            android:background="#FFC000"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_weight="1.3">
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_baseline_fiber_manual_record_24" />
+                android:src="@drawable/ic_mom_calendar"
+                android:layout_weight="1"
+                android:padding="5dp"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="기록보기" />
+                android:text="기록보기"
+                android:textAlignment="center"
+                android:layout_weight="2"
+                android:textSize="30dp"
+                />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_mom_kkeokse"
+                android:padding="20dp"
+                android:layout_weight="0.5"/>
+
+
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layout_nagging"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:background="@color/blue_green">
+            android:layout_height="0dp"
+            android:background="#8FD9B6"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_weight="1.3">
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_baseline_fiber_manual_record_24" />
+                android:src="@drawable/ic_mom_nagging"
+                android:layout_weight="1"
+                android:padding="10dp"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="잔소리하기" />
+                android:text="잔소리하기"
+                android:textAlignment="center"
+                android:layout_weight="2"
+                android:textSize="30dp"
+                />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_mom_kkeokse"
+                android:padding="20dp"
+                android:layout_weight="0.5"/>
+
+
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layout_game"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:background="@color/pink">
+            android:layout_height="0dp"
+            android:background="#B3DE7B"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_weight="1.3">
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_baseline_fiber_manual_record_24" />
+                android:src="@drawable/ic_mom_game"
+                android:layout_weight="1"
+                android:padding="5dp"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="게임하기" />
+                android:text="게임하기"
+                android:textAlignment="center"
+                android:layout_weight="2"
+                android:textSize="30dp"
+                />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_mom_kkeokse"
+                android:padding="20dp"
+                android:layout_weight="0.5"/>
+
+
         </LinearLayout>
 
 
