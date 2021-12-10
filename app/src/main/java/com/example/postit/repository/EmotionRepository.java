@@ -13,7 +13,10 @@ import java.time.temporal.TemporalAdjusters;
 import java.time.temporal.WeekFields;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+
+import io.reactivex.Single;
 
 public class EmotionRepository {
 
@@ -52,4 +55,5 @@ public class EmotionRepository {
 
         return emotionMap2;
     }
+
 }

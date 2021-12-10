@@ -6,11 +6,14 @@ import java.util.Date;
 
 public class VoiceEmotionRecord {
     String audioUrl;
-    Long emotion;
+    int emotion;
     @ServerTimestamp
     Date date;
 
     public VoiceEmotionRecord() {
+    }
+    public VoiceEmotionRecord(int emotion) {
+        this.emotion = emotion;
     }
 
     public String getAudioUrl() {
@@ -21,11 +24,11 @@ public class VoiceEmotionRecord {
         this.audioUrl = audioUrl;
     }
 
-    public Long getEmotion() {
+    public int getEmotion() {
         return emotion;
     }
 
-    public void setEmotion(Long emotion) {
+    public void setEmotion(int emotion) {
         this.emotion = emotion;
     }
 
