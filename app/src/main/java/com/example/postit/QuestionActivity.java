@@ -29,6 +29,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.WriteBatch;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -88,15 +89,20 @@ public class QuestionActivity extends AppCompatActivity {
     void saveEmotionRecordOnDataBase(int emotion){
         EmotionRecord emotionRecord = new EmotionRecord(emotion);
 
+        WriteBatch batch = db.batch();
+        DocumentReference emotionRef = db.collection("users").document(auth.getCurrentUser().getUid())
+                .collection("emotionRecord").document();
 
-
-        db.collection("users").document(auth.getCurrentUser().getUid())
-                .collection("emotionRecord").document()
-                .set(emotionRecord);
+        batch.set(emotionRef,emotionRecord);
 
         ar.setEmotion(emotion);
-        audioRef.set(emotion).addOnCompleteListener((task)->{
-            finish();
+        batch.set(audioRef,ar);
+
+        batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                finish();
+            }
         });
     }
 
