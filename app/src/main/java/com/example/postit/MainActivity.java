@@ -68,6 +68,14 @@ public class MainActivity extends AppCompatActivity {
 
         model.fetchWeeklyData();
 
+        binding.btnQuestionActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, QuestionActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     void initProportionView(){
