@@ -1,5 +1,6 @@
 package com.example.postit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.widget.Toast;
@@ -59,6 +60,8 @@ public class SignUpActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         Toast.makeText(getApplicationContext(),"계정을 성공적으로 생성하였습니다.",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(),MyInfoActivity.class);
+                        startActivity(intent);
                         finish();
                     }else{
                         Toast.makeText(getApplicationContext(),"계정 생성에 실패하였습니다..",Toast.LENGTH_SHORT).show();

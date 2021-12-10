@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
+    //잏히힛
     void initView() {
         binding.monday.weekDayTextView.setText("월");
         binding.tuesday.weekDayTextView.setText("화");

@@ -33,7 +33,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         int id = Integer.parseInt(remoteMessage.getData().get("questionId"));
 
         NotificationManagerCompat.from(this).notify(1234,createNotification("주무시나요??","오늘 하루는 어떠셨나요? 저에게 얘기해주세요!",id));
+        playSound();
+    }
 
+    private void playSound() {
+        Intent intent = new Intent(this,BackgroundSoundService.class);
+        startService(intent);
     }
 
     private void createNotificationChannelIfNeeded() {
@@ -62,4 +67,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         return builder.build();
     }
+
+
 }

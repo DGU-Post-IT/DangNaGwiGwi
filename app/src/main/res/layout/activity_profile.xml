@@ -1,127 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/sky_blue">
 
-    <EditText
-        android:id="@+id/id_edit_text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="6:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="16dp"
-        android:background="@drawable/id_input_text"
-        android:hint="아이디(이메일)"
-        android:inputType="textEmailAddress"
-        android:paddingStart="16dp"
-        android:textSize="20sp" />
-
-    <EditText
-        android:id="@+id/password_edit_text"
-        app:layout_constraintDimensionRatio="6:1"
-        app:layout_constraintEnd_toEndOf="@id/id_edit_text"
-        app:layout_constraintStart_toStartOf="@id/id_edit_text"
-        app:layout_constraintTop_toBottomOf="@id/id_edit_text"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/id_input_text"
-        android:hint="비밀번호"
-        android:inputType="textPassword"
-        android:paddingStart="16dp"
-        android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/login_button"
-        app:layout_constraintDimensionRatio="6:1"
-        app:layout_constraintEnd_toEndOf="@id/password_edit_text"
-        app:layout_constraintStart_toStartOf="@id/password_edit_text"
-        app:layout_constraintTop_toBottomOf="@id/password_edit_text"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="@color/blue_green"
-        android:text="로그인"
-        android:textColor="@color/white"
-
-        android:textSize="20sp" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/signUpButton"
-        app:layout_constraintEnd_toEndOf="@id/login_button"
-        app:layout_constraintStart_toStartOf="@id/login_button"
-        app:layout_constraintTop_toBottomOf="@id/login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:text="회원가입" />
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/register_user_info_button"
-        app:layout_constraintEnd_toEndOf="@id/login_button"
-        app:layout_constraintStart_toStartOf="@id/login_button"
-        app:layout_constraintTop_toBottomOf="@id/login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:visibility="gone"
-        android:text="회원 정보 수정/등록" />
-
-    <LinearLayout
-        android:id="@+id/progress_view"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.8"
-        android:background="@color/gray"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:background="@color/white">
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/hello_title"
+            android:layout_width="200dp"
+            android:layout_height="130dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="80dp"
+            android:autoSizeTextType="uniform"
+            android:text="안녕하세요.\n효도입니다."
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+        <EditText
+            android:id="@+id/id_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="22dp"
+            android:layout_marginBottom="16dp"
+            android:hint="아이디(이메일)"
+            android:inputType="textEmailAddress"
+            android:textColorHint="@color/black"
+            android:paddingStart="22dp"
+            android:textSize="20sp"
+            app:layout_constraintDimensionRatio="6:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hello_title" />
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/signUpButton"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:orientation="vertical">
-
-        <TimePicker
-            android:id="@+id/timePicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintVertical_chainStyle="packed"
-            android:timePickerMode="spinner"
-            android:layout_gravity="center"/>
+        <EditText
+            android:id="@+id/password_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="22dp"
+            android:hint="비밀번호"
+            android:inputType="textPassword"
+            android:paddingStart="22dp"
+            android:textSize="20sp"
+            android:textColorHint="@color/black"
+            app:layout_constraintDimensionRatio="6:1"
+            app:layout_constraintEnd_toEndOf="@id/id_edit_text"
+            app:layout_constraintStart_toStartOf="@id/id_edit_text"
+            app:layout_constraintTop_toBottomOf="@id/id_edit_text" />
 
         <Button
-            android:text="지정한 시간에 노티피케이션 발생시키기"
+            android:id="@+id/login_button"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/login_button_enabled"
+            android:text="로그인"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="6:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/account_button_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:id="@+id/button_notification"
-            android:backgroundTint="@color/blue_green"
-            android:layout_gravity="center"/>
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/login_button"
+            >
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/sign_up_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:text="회원가입"
+                android:textColor="@color/orange"
+                android:textSize="24sp"
+                android:layout_marginBottom="5dp"/>
+            <View
+                android:id="@+id/button_divider_view"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="5dp"
+                android:background="@color/gray"
+                android:paddingVertical="7dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/password_find_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:text="비밀번호 찾기"
+                android:textSize="24sp"/>
+        </LinearLayout>
 
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/register_user_info_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:text="회원 정보 수정"
+            android:textSize="24sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/login_button"
+            app:layout_constraintEnd_toEndOf="@id/login_button"
+            app:layout_constraintStart_toStartOf="@id/login_button" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/progress_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.8"
+            android:background="@color/gray"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:orientation="vertical"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--            app:layout_constraintRight_toRightOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/signUpButton">-->
+
+        <!--            <TimePicker-->
+        <!--                android:id="@+id/timePicker"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center"-->
+        <!--                android:timePickerMode="spinner"-->
+        <!--                app:layout_constraintVertical_chainStyle="packed" />-->
+
+        <!--            <Button-->
+        <!--                android:id="@+id/button_notification"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center"-->
+        <!--                android:layout_marginTop="20dp"-->
+        <!--                android:backgroundTint="@color/blue_green"-->
+        <!--                android:text="지정한 시간에 노티피케이션 발생시키기" />-->
 
 
+        <!--        </LinearLayout>-->
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
