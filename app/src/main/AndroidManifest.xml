@@ -65,6 +65,7 @@
         <receiver android:name=".AlarmReceiver" />
         <activity android:name=".SignUpActivity"/>
         <activity android:name=".MyInfoActivity"/>
+        <service android:name=".BackgroundSoundService"/>
 
 
     </application>

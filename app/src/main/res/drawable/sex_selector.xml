@@ -6,7 +6,7 @@
         >
     </item>
     <item android:state_selected="false"
-        android:drawable="@drawable/radius_sex_button_1"
+        android:drawable="@drawable/gray_stroke_bg"
         >
     </item>
 
