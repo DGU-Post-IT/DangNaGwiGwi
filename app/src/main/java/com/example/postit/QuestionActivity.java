@@ -53,6 +53,8 @@ public class QuestionActivity extends AppCompatActivity {
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
     int questionId;
+    DocumentReference audioRef;
+    AudioRecord ar;
 
     boolean isRecording = false;
 
@@ -86,13 +88,16 @@ public class QuestionActivity extends AppCompatActivity {
     void saveEmotionRecordOnDataBase(int emotion){
         EmotionRecord emotionRecord = new EmotionRecord(emotion);
 
+
+
         db.collection("users").document(auth.getCurrentUser().getUid())
                 .collection("emotionRecord").document()
-                .set(emotionRecord)
-                .addOnCompleteListener((task)->{
-                    //앱 꺼지기 전에 밤인사 추가하기!!
-                   finish();
-                });
+                .set(emotionRecord);
+
+        ar.setEmotion(emotion);
+        audioRef.set(emotion).addOnCompleteListener((task)->{
+            finish();
+        });
     }
 
     @Override
@@ -263,8 +268,10 @@ public class QuestionActivity extends AppCompatActivity {
         String myID = auth.getCurrentUser().getUid();
         DocumentReference ref = db.collection("users").document(myID)
                 .collection("audioFile").document();
-        AudioRecord audioRecord = new AudioRecord(auth.getCurrentUser().getUid(), downloadUri, new ArrayList<>(),questionId);
+        AudioRecord audioRecord = new AudioRecord(auth.getCurrentUser().getUid(), downloadUri, 0,questionId);
         ref.set(audioRecord);
+        audioRef = ref;
+        ar = audioRecord;
 
         showEmotionDialog();
     }

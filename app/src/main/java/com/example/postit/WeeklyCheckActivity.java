@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.postit.databinding.ActivityWeeklycheckBinding;
+import com.example.postit.model.AudioRecord;
 import com.example.postit.model.VoiceEmotionRecord;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -58,9 +59,9 @@ public class WeeklyCheckActivity extends AppCompatActivity {
         binding.recordHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         binding.recordHistoryRecyclerView.setAdapter(adapter);
 
-        model.recordData.observe(this, new Observer<ArrayList<VoiceEmotionRecord>>() {
+        model.recordData.observe(this, new Observer<ArrayList<AudioRecord>>() {
             @Override
-            public void onChanged(ArrayList<VoiceEmotionRecord> voiceEmotionRecords) {
+            public void onChanged(ArrayList<AudioRecord> voiceEmotionRecords) {
                 adapter.data = voiceEmotionRecords;
                 adapter.notifyDataSetChanged();
                 Log.d("recordData changed","changed!!!");
