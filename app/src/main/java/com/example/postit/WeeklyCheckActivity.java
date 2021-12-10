@@ -1,7 +1,6 @@
 package com.example.postit;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -13,22 +12,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.postit.EmotionIconUtil;
-import com.example.postit.KoreanTime;
-import com.example.postit.MainViewModel;
-import com.example.postit.ProfileActivity;
-import com.example.postit.QuestionActivity;
-import com.example.postit.QuestionIdUtil;
 import com.example.postit.databinding.ActivityWeeklycheckBinding;
+import com.example.postit.model.VoiceEmotionRecord;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
-import java.time.DayOfWeek;
-import java.time.format.TextStyle;
-import java.util.HashMap;
-import java.util.Locale;
+import java.util.ArrayList;
 
 public class WeeklyCheckActivity extends AppCompatActivity {
 
@@ -47,7 +39,7 @@ public class WeeklyCheckActivity extends AppCompatActivity {
     //파이어베이스 로그인 인증 객체
     private FirebaseAuth auth = FirebaseAuth.getInstance();
 
-    private MainViewModel model;
+    private HistoryViewModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,150 +47,32 @@ public class WeeklyCheckActivity extends AppCompatActivity {
         binding = ActivityWeeklycheckBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         checkStoragePermission();
-        model = new ViewModelProvider(this).get(MainViewModel.class);
+        model = new ViewModelProvider(this).get(HistoryViewModel.class);
 
+        initRecyclerView();
         bindView();
-        initView();
-
-        int today_idx = (int) ((KoreanTime.koreaToday()) % 5);
-        Log.d("TAG", today_idx + "");
-        Intent intent = new Intent(this, QuestionActivity.class);
-        intent.putExtra("questionId", today_idx);
-        binding.questionButton.setOnClickListener((v) -> {
-            startActivity(intent);
-        });
-
     }
 
-    void initView() {
-        binding.monday.weekDayTextView.setText("월");
-        binding.tuesday.weekDayTextView.setText("화");
-        binding.wednesday.weekDayTextView.setText("수");
-        binding.thursday.weekDayTextView.setText("목");
-        binding.friday.weekDayTextView.setText("금");
-        binding.saturday.weekDayTextView.setText("토");
-        binding.sunday.weekDayTextView.setText("일");
+    void initRecyclerView() {
+        RecordHistoryAdapter adapter = new RecordHistoryAdapter(this);
+        binding.recordHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        binding.recordHistoryRecyclerView.setAdapter(adapter);
 
-        model.emotionMap.observe(this, new Observer<HashMap<DayOfWeek, Integer>>() {
+        model.recordData.observe(this, new Observer<ArrayList<VoiceEmotionRecord>>() {
             @Override
-            public void onChanged(HashMap<DayOfWeek, Integer> hm) {
-                binding.monday.emotionIconImageView.setImageResource(EmotionIconUtil.getEmotionIcon(hm.getOrDefault(DayOfWeek.MONDAY, 4)));
-                binding.tuesday.emotionIconImageView.setImageResource(EmotionIconUtil.getEmotionIcon(hm.getOrDefault(DayOfWeek.TUESDAY, 4)));
-                binding.wednesday.emotionIconImageView.setImageResource(EmotionIconUtil.getEmotionIcon(hm.getOrDefault(DayOfWeek.WEDNESDAY, 4)));
-                binding.thursday.emotionIconImageView.setImageResource(EmotionIconUtil.getEmotionIcon(hm.getOrDefault(DayOfWeek.THURSDAY, 4)));
-                binding.friday.emotionIconImageView.setImageResource(EmotionIconUtil.getEmotionIcon(hm.getOrDefault(DayOfWeek.FRIDAY, 4)));
-                binding.saturday.emotionIconImageView.setImageResource(EmotionIconUtil.getEmotionIcon(hm.getOrDefault(DayOfWeek.SATURDAY, 4)));
-                binding.sunday.emotionIconImageView.setImageResource(EmotionIconUtil.getEmotionIcon(hm.getOrDefault(DayOfWeek.SUNDAY, 4)));
+            public void onChanged(ArrayList<VoiceEmotionRecord> voiceEmotionRecords) {
+                adapter.data = voiceEmotionRecords;
+                adapter.notifyDataSetChanged();
+                Log.d("recordData changed","changed!!!");
             }
         });
+        model.fetchRecordHistory();
 
-        model.audioFileMap.observe(this, new Observer<HashMap<String, String>>() {
-            @Override
-            public void onChanged(HashMap<String, String> hm) {
-                binding.monday.playButton.setTag(hm.getOrDefault(DayOfWeek.MONDAY.getDisplayName(TextStyle.SHORT, Locale.KOREA), null));
-                binding.tuesday.playButton.setTag(hm.getOrDefault(DayOfWeek.TUESDAY.getDisplayName(TextStyle.SHORT, Locale.KOREA), null));
-                binding.wednesday.playButton.setTag(hm.getOrDefault(DayOfWeek.WEDNESDAY.getDisplayName(TextStyle.SHORT, Locale.KOREA), null));
-                binding.thursday.playButton.setTag(hm.getOrDefault(DayOfWeek.THURSDAY.getDisplayName(TextStyle.SHORT, Locale.KOREA), null));
-                binding.friday.playButton.setTag(hm.getOrDefault(DayOfWeek.FRIDAY.getDisplayName(TextStyle.SHORT, Locale.KOREA), null));
-                binding.saturday.playButton.setTag(hm.getOrDefault(DayOfWeek.SATURDAY.getDisplayName(TextStyle.SHORT, Locale.KOREA), null));
-                binding.sunday.playButton.setTag(hm.getOrDefault(DayOfWeek.SUNDAY.getDisplayName(TextStyle.SHORT, Locale.KOREA), null));
-            }
-        });
-
-        model.mondayQuestionId.observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                binding.monday.playButtonQuestion.setTag(integer);
-            }
-        });
-        model.tuesdayQuestionId.observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                binding.tuesday.playButtonQuestion.setTag(integer);
-            }
-        });
-        model.wednesdayQuestionId.observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                binding.wednesday.playButtonQuestion.setTag(integer);
-            }
-        });
-        model.thursdayQuestionId.observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                binding.thursday.playButtonQuestion.setTag(integer);
-            }
-        });
-        model.fridayQuestionId.observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                binding.friday.playButtonQuestion.setTag(integer);
-            }
-        });
-        model.saturdayQuestionId.observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                binding.saturday.playButtonQuestion.setTag(integer);
-            }
-        });
-        model.sundayQuestionId.observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                binding.sunday.playButtonQuestion.setTag(integer);
-            }
-        });
 
     }
 
 
     private void bindView() {
-        binding.myPageButton.setOnClickListener((v) -> {
-            Intent intent = new Intent(this, ProfileActivity.class);
-            startActivity(intent);
-        });
-        binding.monday.playButtonQuestion.setOnClickListener((v) -> {
-            playAudioByFile((int) v.getTag());
-        });
-        binding.tuesday.playButtonQuestion.setOnClickListener((v) -> {
-            playAudioByFile((int) v.getTag());
-        });
-        binding.wednesday.playButtonQuestion.setOnClickListener((v) -> {
-            playAudioByFile((int) v.getTag());
-        });
-        binding.thursday.playButtonQuestion.setOnClickListener((v) -> {
-            playAudioByFile((int) v.getTag());
-        });
-        binding.friday.playButtonQuestion.setOnClickListener((v) -> {
-            playAudioByFile((int) v.getTag());
-        });
-        binding.saturday.playButtonQuestion.setOnClickListener((v) -> {
-            playAudioByFile((int) v.getTag());
-        });
-        binding.sunday.playButtonQuestion.setOnClickListener((v) -> {
-            playAudioByFile((int) v.getTag());
-        });
-
-        binding.monday.playButton.setOnClickListener((v) -> {
-            playAudioByUrl((String) v.getTag());
-        });
-        binding.tuesday.playButton.setOnClickListener((v) -> {
-            playAudioByUrl((String) v.getTag());
-        });
-        binding.wednesday.playButton.setOnClickListener((v) -> {
-            playAudioByUrl((String) v.getTag());
-        });
-        binding.thursday.playButton.setOnClickListener((v) -> {
-            playAudioByUrl((String) v.getTag());
-        });
-        binding.friday.playButton.setOnClickListener((v) -> {
-            playAudioByUrl((String) v.getTag());
-        });
-        binding.saturday.playButton.setOnClickListener((v) -> {
-            playAudioByUrl((String) v.getTag());
-        });
-        binding.sunday.playButton.setOnClickListener((v) -> {
-            playAudioByUrl((String) v.getTag());
-        });
 
     }
 
