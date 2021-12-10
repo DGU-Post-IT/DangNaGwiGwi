@@ -14,4 +14,8 @@
     <color name="gray">#CCA0A0A0</color>
     <color name="light_gray">#E6E6E6</color>
     <color name="orange">#CD5A32</color>
+    <color name="happy_pink">#FF999A</color>
+    <color name="soso_blue">#53628B</color>
+    <color name="angry_yellow">#FFC000</color>
+    <color name="sad_mint">#A9D4DA</color>
 </resources>

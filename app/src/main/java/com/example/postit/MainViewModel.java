@@ -24,6 +24,8 @@ import java.time.ZoneId;
 import java.time.format.TextStyle;
 import java.time.temporal.TemporalAdjusters;
 import java.time.temporal.WeekFields;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -35,6 +37,7 @@ public class MainViewModel extends AndroidViewModel {
     final DayOfWeek lastDayOfWeek = DayOfWeek.of(((firstDayOfWeek.getValue() + 6) % DayOfWeek.values().length) + 1);
 
     MutableLiveData<HashMap<String,String>> audioFileMap = new MutableLiveData<HashMap<String, String>>(new HashMap<>());
+    MutableLiveData<Integer[]> emotionCount = new MutableLiveData<>(new Integer[]{0,0,0,0});
     MutableLiveData<HashMap<DayOfWeek,Integer>> emotionMap = new MutableLiveData<HashMap<DayOfWeek, Integer>>(new HashMap<>());
     MutableLiveData<Integer> mondayQuestionId = new MutableLiveData<>(-1);
     MutableLiveData<Integer> tuesdayQuestionId = new MutableLiveData<>(-1);
@@ -65,8 +68,9 @@ public class MainViewModel extends AndroidViewModel {
                 .orderBy("time", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener((task) -> {
-
                     HashMap<DayOfWeek,Integer> emotionMap2 = new HashMap<>();
+                    Integer[] arr = new Integer[4];
+                    Arrays.fill(arr, 0);
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot doc :
                                 task.getResult()) {
@@ -74,11 +78,13 @@ public class MainViewModel extends AndroidViewModel {
                             LocalDate localDate = er.getTime().toInstant() // Date -> Instant
                                     .atZone(ZoneId.systemDefault()) // Instant -> ZonedDateTime
                                     .toLocalDate();
-
                             emotionMap2.put(localDate.getDayOfWeek(),er.getEmotion());
+                            arr[er.getEmotion()]++;
 
                         }
                         this.emotionMap.setValue(emotionMap2);
+                        Log.d("data","setting value");
+                        this.emotionCount.setValue(arr);
                     }
                 });
         db.collection("users").document(auth.getCurrentUser().getUid())
