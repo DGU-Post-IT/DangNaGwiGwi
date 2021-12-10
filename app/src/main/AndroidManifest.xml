@@ -34,6 +34,7 @@
         <activity android:name=".QuestionActivity"/>
         <activity android:name=".ChildrenManageActivity"/>
         <activity android:name=".ImageActivity"/>
+        <activity android:name=".WeeklyCheckActivity"/>
 
         <service
             android:name=".MyFirebaseMessagingService"
