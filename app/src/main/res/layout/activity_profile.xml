@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F2F3F4">
@@ -15,7 +15,6 @@
             android:layout_marginTop="80dp"
             android:autoSizeTextType="uniform"
             android:text="안녕하세요.\n효도입니다."
-
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -54,17 +53,18 @@
             app:layout_constraintStart_toStartOf="@id/id_edit_text"
             app:layout_constraintTop_toBottomOf="@id/id_edit_text" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/login_button"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/login_button_enabled"
+            android:background="@drawable/login_button_dirty"
             android:text="로그인"
             android:textColor="@color/white"
             android:textSize="28sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="6:1"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
 
         <LinearLayout
@@ -108,7 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:text="회원 정보 수정"
+            android:text="자녀 관계 보기"
             android:textSize="24sp"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/login_button"
@@ -130,36 +130,6 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
-
-        <!--        <LinearLayout-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="0dp"-->
-        <!--            android:orientation="vertical"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--            app:layout_constraintRight_toRightOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/signUpButton">-->
-
-        <!--            <TimePicker-->
-        <!--                android:id="@+id/timePicker"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_gravity="center"-->
-        <!--                android:timePickerMode="spinner"-->
-        <!--                app:layout_constraintVertical_chainStyle="packed" />-->
-
-        <!--            <Button-->
-        <!--                android:id="@+id/button_notification"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_gravity="center"-->
-        <!--                android:layout_marginTop="20dp"-->
-        <!--                android:backgroundTint="@color/blue_green"-->
-        <!--                android:text="지정한 시간에 노티피케이션 발생시키기" />-->
-
-
-        <!--        </LinearLayout>-->
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

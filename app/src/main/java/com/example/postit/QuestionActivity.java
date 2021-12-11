@@ -284,7 +284,7 @@ public class QuestionActivity extends AppCompatActivity {
         String myID = auth.getCurrentUser().getUid();
         DocumentReference ref = db.collection("users").document(myID)
                 .collection("audioFile").document();
-        AudioRecord audioRecord = new AudioRecord(auth.getCurrentUser().getUid(), downloadUri, 0,questionId);
+        AudioRecord audioRecord = new AudioRecord(auth.getCurrentUser().getUid(), downloadUri, 0,questionId,"hello");
         ref.set(audioRecord);
         audioRef = ref;
         ar = audioRecord;

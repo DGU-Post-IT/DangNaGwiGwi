@@ -13,6 +13,7 @@ public class AudioRecord {
     private String audioLocation;
     private int questionId;
     private int emotion;
+    private String answer;
 
     public int getQuestionId() {
         return questionId;
@@ -24,11 +25,20 @@ public class AudioRecord {
 
     AudioRecord(){}
 
-    public AudioRecord(String speakerID, String audioLocation, int emotion, int questionId) {
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public AudioRecord(String speakerID, String audioLocation, int emotion, int questionId, String answer) {
         this.speakerID = speakerID;
         this.audioLocation = audioLocation;
         this.emotion = emotion;
         this.questionId = questionId;
+        this.answer =answer;
     }
 
     public String getSpeakerID() {
