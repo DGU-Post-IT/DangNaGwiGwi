@@ -133,19 +133,19 @@ public class QuestionActivity extends AppCompatActivity {
         player = MediaPlayer.create(this, QuestionIdUtil.getAudioId(questionId));
         switch (questionId){
             case 0:
-                binding.tvQuestion.setText("1번질문 \n아래 버튼을 눌러주세요!");
+                binding.tvQuestion.setText("어르신, 오늘 가장 \n 재미있었던 일이 뭐에요?");
                 break;
             case 1:
-                binding.tvQuestion.setText("2번질문 \n아래 버튼을 눌러주세요!");
+                binding.tvQuestion.setText("어르신, 오늘 가장 \n 재미있었던 일이 뭐에요?");
                 break;
             case 2:
-                binding.tvQuestion.setText("3번질문 \n아래 버튼을 눌러주세요!");
+                binding.tvQuestion.setText("어르신, 오늘 가장 \n 재미있었던 일이 뭐에요?");
                 break;
             case 3:
-                binding.tvQuestion.setText("4번질문 \n아래 버튼을 눌러주세요!");
+                binding.tvQuestion.setText("어르신, 오늘 가장 \n 재미있었던 일이 뭐에요?");
                 break;
             case 4:
-                binding.tvQuestion.setText("5번질문 \n아래 버튼을 눌러주세요!");
+                binding.tvQuestion.setText("어르신, 오늘 가장 \n 재미있었던 일이 뭐에요?");
                 break;
         }
 
