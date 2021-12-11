@@ -67,7 +67,7 @@ public class RecordHistoryAdapter extends RecyclerView.Adapter<RecordHistoryAdap
             binding.emotionIconImageView.setImageResource(icon);
 
             if(data.getQuestionId()==0){
-                binding.questionTextView.setText("나에게 가장 잘해줬던 사람은 누구인가? \n 그 사람에게 어떤 선물을 주고 싶나요?");
+                binding.questionTextView.setText("나에게 가장 잘해줬던 사람은 누구인가요? \n 그 사람에게 어떤 선물을 주고 싶나요?");
             }else if(data.getQuestionId()==1){
                 binding.questionTextView.setText("다시 돌아가고 싶은 순간은 언제였나요?");
             }else if(data.getQuestionId()==2){
@@ -79,7 +79,7 @@ public class RecordHistoryAdapter extends RecyclerView.Adapter<RecordHistoryAdap
             }else{
                 binding.questionTextView.setText("나에게 가장 잘해줬던 사람은 누구인가? \n 그 사람에게 어떤 선물을 주고 싶나요?");
             }
-            binding.answerTextView.setText("우리집 둘째가 되게 잘해. 착하지");
+            binding.answerTextView.setText(data.getAnswer());
 
 
         }

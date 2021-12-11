@@ -1,6 +1,7 @@
 package com.example.postit;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.widget.Toast;
