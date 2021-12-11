@@ -98,10 +98,20 @@ public class QuestionActivity extends AppCompatActivity {
         ar.setEmotion(emotion);
         batch.set(audioRef,ar);
 
+        MediaPlayer player2 = MediaPlayer.create(this, R.raw.good_night);
+
         batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                finish();
+
+                player2.start();
+
+                player2.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        finish();
+                    }
+                });
             }
         });
     }
