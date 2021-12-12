@@ -53,14 +53,14 @@ public class RecordHistoryAdapter extends RecyclerView.Adapter<RecordHistoryAdap
             binding.dateTextView.setText(String.format("%02d.%02d",ld.getMonthValue(),ld.getDayOfMonth()));
 
             int icon;
-            if(data.getEmotion()==0){
+            if(data.getEmotion()==Emotion.HAPPY.ordinal()){
                 icon = R.drawable.ic_weather_good_shadow;
-            }else if(data.getEmotion()==1){
-                icon = R.drawable.ic_weather_soso_shadow;
-            }else if(data.getEmotion()==2){
-                icon = R.drawable.ic_weather_angry_shadow;
-            }else if(data.getEmotion()==3){
+            }else if(data.getEmotion()==Emotion.SAD.ordinal()){
                 icon = R.drawable.ic_weather_sad_shadow;
+            }else if(data.getEmotion()==Emotion.ANGRY.ordinal()){
+                icon = R.drawable.ic_weather_angry_shadow;
+            }else if(data.getEmotion()==Emotion.SOSO.ordinal()){
+                icon = R.drawable.ic_weather_soso_shadow;
             }else{
                 icon = R.drawable.ic_baseline_not_interested_24;
             }
