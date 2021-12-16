@@ -1,7 +1,7 @@
 package com.example.postit;
 
 public class QuestionIdUtil {
-    static int getAudioId(int questionId){
+    public static int getAudioId(int questionId){
         switch(questionId){
             case 0:
                 return R.raw.postit_1;

@@ -1,4 +1,4 @@
-package com.example.postit;
+package com.example.postit.presentation.weeklyemotion;
 
 import android.app.Application;
 

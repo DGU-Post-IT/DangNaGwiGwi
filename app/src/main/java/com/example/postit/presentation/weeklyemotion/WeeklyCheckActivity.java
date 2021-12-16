@@ -1,4 +1,4 @@
-package com.example.postit;
+package com.example.postit.presentation.weeklyemotion;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -14,9 +14,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.postit.QuestionIdUtil;
 import com.example.postit.databinding.ActivityWeeklycheckBinding;
 import com.example.postit.model.AudioRecord;
-import com.example.postit.model.VoiceEmotionRecord;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -56,6 +56,9 @@ public class WeeklyCheckActivity extends AppCompatActivity {
 
     void initRecyclerView() {
         RecordHistoryAdapter adapter = new RecordHistoryAdapter(this);
+        adapter.setOnButtonClickListener((v,url)->{
+            playAudioByUrl(url);
+        });
         binding.recordHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         binding.recordHistoryRecyclerView.setAdapter(adapter);
 
