@@ -31,6 +31,8 @@ public class ChildrenManageActivity extends AppCompatActivity {
 
     ActivityChildrenManageBinding binding;
     ChildrenAdapter adapter;
+    ChildrenAdapter followerAdapter;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,11 +42,13 @@ public class ChildrenManageActivity extends AppCompatActivity {
 
         initRequestRecyclerView();
         fetchRequest();
+        fetchChildren();
 
         binding.refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 fetchRequest();
+                fetchChildren();
                 binding.refreshLayout.setRefreshing(false);
             }
         });
@@ -59,6 +63,13 @@ public class ChildrenManageActivity extends AppCompatActivity {
         });
         binding.requestRecyclerView.setAdapter(adapter);
         binding.requestRecyclerView.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
+
+        followerAdapter = new ChildrenAdapter();
+        followerAdapter.setOnButtonClickListener((v, email) -> {
+        });
+        binding.childrenRecyclerView.setAdapter(followerAdapter);
+        binding.childrenRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+
     }
 
     void fetchRequest(){ //자식으로부토 온 요청 가져오기
@@ -73,7 +84,21 @@ public class ChildrenManageActivity extends AppCompatActivity {
                                arr) {
                            Log.d("arr",a);
                        }
-
+                   }
+                });
+    }
+    void fetchChildren(){ //자식으로부토 온 요청 가져오기
+        db.collection("users").document(auth.getCurrentUser().getUid())
+                .get()
+                .addOnCompleteListener((task)->{
+                   if(task.isSuccessful()){
+                       ArrayList<String> arr = (ArrayList<String>)task.getResult().get("follower");
+                       if(arr==null) return;
+                       followerAdapter.addData(arr);
+                       for (String a :
+                               arr) {
+                           Log.d("arr",a);
+                       }
                    }
                 });
     }
@@ -89,6 +114,7 @@ public class ChildrenManageActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Void unused) {
                 fetchRequest();
+                fetchChildren();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
