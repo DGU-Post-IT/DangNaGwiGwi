@@ -14,11 +14,11 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="80dp"
             android:autoSizeTextType="uniform"
+            android:fontFamily="@font/dx_font"
             android:text="안녕하세요.\n효도입니다."
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:fontFamily="@font/dx_font"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/id_edit_text"
@@ -30,8 +30,8 @@
             android:layout_marginBottom="16dp"
             android:hint="아이디(이메일)"
             android:inputType="textEmailAddress"
-            android:textColorHint="@color/black"
             android:paddingStart="22dp"
+            android:textColorHint="@color/black"
             android:textSize="20sp"
             app:layout_constraintDimensionRatio="6:1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,8 +46,8 @@
             android:hint="비밀번호"
             android:inputType="textPassword"
             android:paddingStart="22dp"
-            android:textSize="20sp"
             android:textColorHint="@color/black"
+            android:textSize="20sp"
             app:layout_constraintDimensionRatio="6:1"
             app:layout_constraintEnd_toEndOf="@id/id_edit_text"
             app:layout_constraintStart_toStartOf="@id/id_edit_text"
@@ -72,19 +72,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/login_button"
-            >
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/sign_up_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:background="@null"
                 android:text="회원가입"
                 android:textColor="@color/orange"
-                android:textSize="24sp"
-                android:layout_marginBottom="5dp"/>
+                android:textSize="24sp" />
+
             <View
                 android:id="@+id/button_divider_view"
                 android:layout_width="1dp"
@@ -99,21 +100,53 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:text="비밀번호 찾기"
-                android:textSize="24sp"/>
+                android:textSize="24sp" />
         </LinearLayout>
 
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/register_user_info_button"
+        <LinearLayout
+            android:id="@+id/account_info_button_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:text="내 정보 수정"
-            android:textSize="24sp"
-            android:visibility="gone"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@id/login_button"
-            app:layout_constraintEnd_toEndOf="@id/login_button"
-            app:layout_constraintStart_toStartOf="@id/login_button" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/register_user_info_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:text="내 정보 수정"
+                android:textSize="24sp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintBottom_toTopOf="@id/login_button"
+                app:layout_constraintEnd_toStartOf="@id/child_manage_button"
+                app:layout_constraintStart_toStartOf="@id/login_button" />
+            <View
+                android:id="@+id/button_divider_view_2"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="5dp"
+                android:background="@color/gray"
+                android:paddingVertical="7dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/child_manage_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:text="자녀 요청 보기"
+                android:textSize="24sp"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintEnd_toEndOf="@id/login_button"
+                app:layout_constraintBottom_toBottomOf="@id/register_user_info_button"
+                app:layout_constraintStart_toEndOf="@id/register_user_info_button"
+                app:layout_constraintTop_toTopOf="@id/register_user_info_button" />
+        </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/progress_view"

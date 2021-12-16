@@ -1,18 +1,9 @@
 package com.example.postit;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,12 +18,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -53,14 +38,18 @@ public class ProfileActivity extends AppCompatActivity {
 
         bindLoginButton();
         bindSignUpButton();
-        bindInfoRegisterButton();
+        bindButton();
 //        timepicker_set();
 
     }
 
-    private void bindInfoRegisterButton() {
+    private void bindButton() {
         binding.registerUserInfoButton.setOnClickListener((v) -> {
             Intent intent = new Intent(this, MyInfoActivity.class);
+            startActivity(intent);
+        });
+        binding.childManageButton.setOnClickListener((v) -> {
+            Intent intent = new Intent(this, ChildrenManageActivity.class);
             startActivity(intent);
         });
     }
@@ -95,7 +84,7 @@ public class ProfileActivity extends AppCompatActivity {
             binding.passwordEditText.setEnabled(true);
             binding.idEditText.setText("");
             binding.accountButtonLayout.setVisibility(View.VISIBLE);
-            binding.registerUserInfoButton.setVisibility(View.GONE);
+            binding.accountInfoButtonLayout.setVisibility(View.GONE);
             binding.passwordEditText.setText("");
             binding.loginButton.setText("로그인");
         } else {
@@ -103,7 +92,7 @@ public class ProfileActivity extends AppCompatActivity {
             binding.idEditText.setEnabled(false);
             binding.passwordEditText.setText("******");
             binding.passwordEditText.setEnabled(false);
-            binding.registerUserInfoButton.setVisibility(View.VISIBLE);
+            binding.accountInfoButtonLayout.setVisibility(View.VISIBLE);
             binding.accountButtonLayout.setVisibility(View.GONE);
             binding.loginButton.setText("로그아웃");
         }
