@@ -108,7 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:text="자녀 관계 보기"
+            android:text="내 정보 수정"
             android:textSize="24sp"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/login_button"
