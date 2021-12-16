@@ -1,7 +1,7 @@
 package com.example.postit;
 
 public class EmotionIconUtil {
-    static int getEmotionIcon(int emotion) {
+    public static int getEmotionIcon(int emotion) {
         switch (emotion) {
             case 0:
                 return R.drawable.ic_weather_good_shadow;

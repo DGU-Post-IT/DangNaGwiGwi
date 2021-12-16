@@ -1,10 +1,12 @@
 package com.example.postit.repository;
 
 import com.example.postit.model.EmotionRecord;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -16,7 +18,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-import io.reactivex.Single;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.core.Single;
 
 public class EmotionRepository {
 
@@ -55,5 +60,19 @@ public class EmotionRepository {
 
         return emotionMap2;
     }
+
+//    public Observable<Task<QuerySnapshot>> getWeeklyEmotion(){
+//        LocalDate date = LocalDate.now();
+//
+//
+//        db.collection("users").document(auth.getCurrentUser().getUid())
+//                .collection("emotionRecord")
+//                .whereLessThanOrEqualTo("time", Date.from(date.with(TemporalAdjusters.nextOrSame(lastDayOfWeek)).atStartOfDay(ZoneId.of("Asia/Seoul")).toInstant()))
+//                .whereGreaterThanOrEqualTo("time", Date.from(date.with(TemporalAdjusters.previousOrSame(firstDayOfWeek)).atStartOfDay(ZoneId.of("Asia/Seoul")).toInstant()))
+//                .orderBy("time", Query.Direction.DESCENDING)
+//                .get();
+//
+//
+//    }
 
 }

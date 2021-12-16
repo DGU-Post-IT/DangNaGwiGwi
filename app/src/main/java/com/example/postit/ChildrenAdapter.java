@@ -1,5 +1,6 @@
 package com.example.postit;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +15,15 @@ import java.util.ArrayList;
 public class ChildrenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     ArrayList<String> data = new ArrayList<>();
+    private static final String TAG = "ChildrenAdapter";
 
     // 리스너 객체 참조를 저장하는 변수
     private OnButtonClickListener listener = null;
 
     public interface OnButtonClickListener {
-        void onItemClick(View view, String id);
+        void onItemClick(View view,String email);
     }
+
     public void setOnButtonClickListener(OnButtonClickListener listener) {
         this.listener = listener;
     }
@@ -43,26 +46,28 @@ public class ChildrenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return data.size();
     }
 
-    void addData(ArrayList<String> data){
+    void addData(ArrayList<String> data) {
+        if (data == null) return;
+        this.data.clear();
         this.data.addAll(data);
         notifyDataSetChanged();
     }
 
-    class RequestViewHolder extends RecyclerView.ViewHolder{
+    class RequestViewHolder extends RecyclerView.ViewHolder {
         ItemRequestBinding binding;
 
         public RequestViewHolder(@NonNull ItemRequestBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            binding.acceptButton.setOnClickListener((v)->{
-                if(listener!=null){
-                    listener.onItemClick(v,data.get(getAdapterPosition()));
+            binding.acceptButton.setOnClickListener((v) -> {
+                if (listener != null) {
+                    listener.onItemClick(v, data.get(getAdapterPosition()));
                 }
             });
         }
 
-        void bind(String id){
-            binding.idTextView.setText(id);
+        void bind(String email) {
+            binding.idTextView.setText(email);
         }
 
         @Override

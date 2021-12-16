@@ -9,6 +9,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.postit.databinding.ActivityUserInfoRegisterBinding;
 import com.example.postit.model.ParentUser;
@@ -34,12 +36,16 @@ public class MyInfoActivity extends AppCompatActivity {
 
     String token;
     ParentUser parent = new ParentUser();
+    MyInfoViewModel model;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityUserInfoRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
+        model = new ViewModelProvider(this).get(MyInfoViewModel.class);
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         getFcmToken();
@@ -47,8 +53,32 @@ public class MyInfoActivity extends AppCompatActivity {
         initEditTExt();
         bindSexSelectButton();
         bindSaveButton();
+        model.fetchUserInfo();
 
+        model.user.observe(this, new Observer<ParentUser>() {
+            @Override
+            public void onChanged(ParentUser parentUser) {
+                if(parentUser!=null){
+                    parent = parentUser;
+                }
+                binding.nameEditText.setText(parentUser.getName());
+                binding.phoneNumberEditText.setText(parentUser.getPhone()!=null?parentUser.getPhone():"");
+                if(parentUser.getSex()==1){
+                    binding.maleButton.setSelected(true);
+                    binding.femaleButton.setSelected(false);
+                }else if(parentUser.getSex()==2){
+                    binding.maleButton.setSelected(false);
+                    binding.femaleButton.setSelected(true);
+                }
+                binding.birthYear.setText(String.valueOf(parentUser.getBirthdate().getYear()));
+                binding.birthMonth.setText(String.valueOf(parentUser.getBirthdate().getMonth()+1));
+                binding.birthDay.setText(String.valueOf(parentUser.getBirthdate().getDay()+1));
+
+            }
+        });
     }
+
+
 
     private void initEditTExt() {
         binding.birthYear.addTextChangedListener(new TextWatcher() {
@@ -172,7 +202,7 @@ public class MyInfoActivity extends AppCompatActivity {
                         token = task.getResult();
 
                         Log.d(TAG, token);
-                        Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
