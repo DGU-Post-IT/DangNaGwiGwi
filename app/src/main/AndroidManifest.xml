@@ -21,7 +21,7 @@
         android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.PostIT">
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,22 +29,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ProfileActivity"/>
-        <activity android:name=".VoiceHistoryActivity"/>
-        <activity android:name=".QuestionActivity">
+        <activity android:name=".presentation.profile.ProfileActivity"/>
+        <activity android:name=".presentation.question.QuestionActivity">
             <intent-filter>
                 <action android:name="question_activity"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ChildrenManageActivity"/>
-        <activity android:name=".ImageActivity"/>
-        <activity android:name=".presentation.weeklyemotion.WeeklyCheckActivity"/>
-        <activity android:name=".NaggingActivity"/>
-        <activity android:name=".GameActivity"/>
+        <activity android:name=".presentation.childrenmanage.ChildrenManageActivity"/>
+        <activity android:name=".presentation.history.HistoryActivity"/>
+        <activity android:name=".presentation.nagging.NaggingActivity"/>
+        <activity android:name=".presentation.game.GameActivity"/>
 
         <service
-            android:name=".MyFirebaseMessagingService"
+            android:name=".service.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -56,7 +54,7 @@
             android:value="@string/default_notification_channel_id" />
 
 
-        <receiver android:name=".DeviceBootReceiver"
+        <receiver android:name=".receiver.DeviceBootReceiver"
             android:enabled="false"
             android:exported="true">
             <intent-filter>
@@ -64,10 +62,10 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".AlarmReceiver" />
-        <activity android:name=".SignUpActivity"/>
-        <activity android:name=".MyInfoActivity"/>
-        <service android:name=".BackgroundSoundService"/>
+        <receiver android:name=".receiver.AlarmReceiver" />
+        <activity android:name=".presentation.signup.SignUpActivity"/>
+        <activity android:name=".presentation.myinfo.MyInfoActivity"/>
+        <service android:name=".service.BackgroundSoundService"/>
 
 
     </application>
