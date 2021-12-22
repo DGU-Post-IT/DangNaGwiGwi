@@ -42,7 +42,6 @@ public class ProfileActivity extends AppCompatActivity {
         bindLoginButton();
         bindSignUpButton();
         bindButton();
-//        timepicker_set();
 
     }
 

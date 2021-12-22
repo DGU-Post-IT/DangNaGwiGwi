@@ -30,8 +30,8 @@ public class MyInfoActivity extends AppCompatActivity {
 
     ActivityUserInfoRegisterBinding binding;
 
-    FirebaseAuth auth;
-    FirebaseFirestore db;
+    FirebaseAuth auth = FirebaseAuth.getInstance();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     String token;
     ParentUser parent = new ParentUser();
@@ -42,11 +42,8 @@ public class MyInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityUserInfoRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-
         model = new ViewModelProvider(this).get(MyInfoViewModel.class);
-        auth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
+
         getFcmToken();
 
         initEditTExt();
@@ -196,12 +193,8 @@ public class MyInfoActivity extends AppCompatActivity {
                             Log.w(TAG, "Fetching FCM registration token failed", task.getException());
                             return;
                         }
-
                         // Get new FCM registration token
                         token = task.getResult();
-
-                        Log.d(TAG, token);
-//                        Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
