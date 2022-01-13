@@ -3,6 +3,7 @@ package com.example.postit.presentation.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         initProportionView();
 
         model.fetchWeeklyData();
+        model.fetchPlantRecord();
     }
 
     private void bindButton() {
@@ -92,6 +94,11 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(Integer[] integers) {
                 binding.proportionView.setDataList(integers);
             }
+        });
+
+        model.plantRecord.observe(this,plantRecord -> {
+            if(plantRecord==null) return;
+            Toast.makeText(this,plantRecord.getHumid()+" "+plantRecord.getTemp()+" "+plantRecord.getMyTimestamp(),Toast.LENGTH_SHORT).show();
         });
     }
 }

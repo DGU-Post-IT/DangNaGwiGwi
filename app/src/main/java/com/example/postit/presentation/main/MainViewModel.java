@@ -10,7 +10,9 @@ import androidx.lifecycle.MutableLiveData;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
+import com.example.postit.model.PlantRecord;
 import com.example.postit.repository.EmotionRepository;
+import com.example.postit.repository.PlantRepository;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -29,10 +31,12 @@ public class MainViewModel extends AndroidViewModel {
     final DayOfWeek lastDayOfWeek = DayOfWeek.of(((firstDayOfWeek.getValue() + 6) % DayOfWeek.values().length) + 1);
 
     MutableLiveData<Integer[]> emotionCount = new MutableLiveData<>(new Integer[]{0,0,0,0});
+    MutableLiveData<PlantRecord> plantRecord = new MutableLiveData<>(null);
 
     FirebaseAuth auth = FirebaseAuth.getInstance();
     
     EmotionRepository emotionRepository = new EmotionRepository();
+    PlantRepository plantRepository = new PlantRepository();
 
     LocalDate date;
 
@@ -124,9 +128,13 @@ public class MainViewModel extends AndroidViewModel {
 //                        audioFileMap.setValue(audioMap);
 //                    }
 //                });
+    }
 
-
-
+    void fetchPlantRecord(){
+        if (auth.getCurrentUser() == null) return;
+        plantRepository.getRecentPlantRecord().subscribe(plantRecord1 -> {
+            plantRecord.setValue(plantRecord1);
+        });
 
     }
 

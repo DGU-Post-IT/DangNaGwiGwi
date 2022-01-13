@@ -2,10 +2,12 @@ package com.example.postit.model;
 
 import com.google.type.DateTime;
 
+import java.util.Date;
+
 public class PlantRecord {
     int humid;
     float temp;
-    DateTime myTimestamp;
+    Date myTimestamp;
 
     public int getHumid() {
         return humid;
@@ -23,11 +25,11 @@ public class PlantRecord {
         this.temp = temp;
     }
 
-    public DateTime getMyTimestamp() {
+    public Date getMyTimestamp() {
         return myTimestamp;
     }
 
-    public void setMyTimestamp(DateTime myTimestamp) {
+    public void setMyTimestamp(Date myTimestamp) {
         this.myTimestamp = myTimestamp;
     }
 }
