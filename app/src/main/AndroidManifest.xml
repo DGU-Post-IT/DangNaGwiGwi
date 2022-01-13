@@ -39,7 +39,7 @@
         <activity android:name=".presentation.childrenmanage.ChildrenManageActivity"/>
         <activity android:name=".presentation.history.HistoryActivity"/>
         <activity android:name=".presentation.nagging.NaggingActivity"/>
-        <activity android:name=".presentation.game.GameActivity"/>
+        <activity android:name=".presentation.plant.PlantActivity"/>
 
         <service
             android:name=".service.MyFirebaseMessagingService"

@@ -8,15 +8,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.postit.presentation.game.GameActivity;
+import com.example.postit.presentation.plant.PlantActivity;
 import com.example.postit.presentation.nagging.NaggingActivity;
 import com.example.postit.presentation.question.QuestionActivity;
 import com.example.postit.R;
 import com.example.postit.databinding.ActivityMainBinding;
 import com.example.postit.presentation.profile.ProfileActivity;
 import com.example.postit.presentation.history.HistoryActivity;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -58,10 +56,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        binding.layoutGame.setOnClickListener(new View.OnClickListener() {
+        binding.layoutPlant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                Intent intent = new Intent(MainActivity.this, PlantActivity.class);
                 startActivity(intent);
             }
         });
