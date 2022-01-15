@@ -1,5 +1,6 @@
 package com.example.postit.repository;
 
+import android.provider.MediaStore;
 import android.util.Log;
 
 import com.example.postit.model.AudioRecord;
@@ -40,6 +41,30 @@ public class AudioRecordRepository {
                                     Log.d(TAG, "subscribe: "+Thread.currentThread().getName());
                                     AudioRecord ar = doc.toObject(AudioRecord.class);
                                     temp.add(ar);
+                                }
+                                emitter.onSuccess(temp);
+                            }
+                        });
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+    public Maybe<AudioRecord> getOneAudioRecordHistory(){
+        return Maybe.create(new MaybeOnSubscribe<AudioRecord>() {
+            @Override
+            public void subscribe(@NonNull MaybeEmitter<AudioRecord> emitter) throws Throwable {
+                db.collection("users").document(auth.getCurrentUser().getUid())
+                        .collection("audioFile").orderBy("time", Query.Direction.DESCENDING)
+                        .limit(1)
+                        .get()
+                        .addOnSuccessListener((querySnapshot) -> {
+                            if (querySnapshot.isEmpty()) {
+                                emitter.onComplete();
+                            }else {
+                                AudioRecord temp = null;
+                                for (QueryDocumentSnapshot doc : querySnapshot) {
+                                    Log.d(TAG, "subscribe: "+Thread.currentThread().getName());
+                                    AudioRecord ar = doc.toObject(AudioRecord.class);
+                                    temp = ar;
                                 }
                                 emitter.onSuccess(temp);
                             }
