@@ -158,7 +158,7 @@ public class QuestionActivity extends AppCompatActivity {
                 binding.tvQuestion.setText("보고싶은 친구들이 있나요? \n친구들이랑 주로 뭐하고 노셨어요?");
                 break;
             case 9:
-                binding.tvQuestion.setText("좋아하는 색깔이 뭐에요?");
+                binding.tvQuestion.setText("좋아하는 색깔이 뭐예요?");
                 break;
         }
 
