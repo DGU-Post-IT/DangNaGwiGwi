@@ -103,7 +103,7 @@ public class RecordHistoryAdapter extends RecyclerView.Adapter<RecordHistoryAdap
             } else if (data.getQuestionId() == 8) {
                 binding.questionTextView.setText("보고싶은 친구들이 있나요? \n친구들이랑 주로 뭐하고 노셨어요?");
             } else if (data.getQuestionId() == 9) {
-                binding.questionTextView.setText("좋아하는 색깔이뭐예요?");
+                binding.questionTextView.setText("좋아하는 색깔이 뭐에요?");
             } else {
                 binding.questionTextView.setText("알 수 없는 질문입니다.");
             }
