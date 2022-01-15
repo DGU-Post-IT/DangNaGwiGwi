@@ -30,7 +30,8 @@ public class PlantRepository {
             @Override
             public void subscribe(@NonNull MaybeEmitter<PlantRecord> emitter) throws Throwable {
                 db.collection("users").document(auth.getCurrentUser().getUid())
-                        .collection("plant").orderBy("myTimestamp", Query.Direction.ASCENDING)
+                        .collection("plant").orderBy("myTimestamp", Query.Direction.DESCENDING)
+                        .limit(1)
                         .get()
                         .addOnSuccessListener((querySnapshot) -> {
                             if (querySnapshot.isEmpty()) {
