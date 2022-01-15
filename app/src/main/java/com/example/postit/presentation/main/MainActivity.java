@@ -42,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
         initProportionView();
 
         model.fetchWeeklyData();
-        model.fetchPlantRecord();
+        model.fetchOneAudioRecord();
+
     }
 
     @Override
@@ -119,9 +120,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        model.plantRecord.observe(this,plantRecord -> {
-            if(plantRecord==null) return;
-            Toast.makeText(this,plantRecord.getHumid()+" "+plantRecord.getTemp()+" "+plantRecord.getMyTimestamp(),Toast.LENGTH_SHORT).show();
+        model.audioRecord.observe(this,ar->{
+            if(ar!=null){
+                binding.todayRecordText.setText("오늘의 감정기록을 이미 하셨습니다.");
+            }else{
+                binding.todayRecordText.setText("오늘의 감정기록을 하지 않으셨습니다.");
+            }
         });
+
     }
 }
