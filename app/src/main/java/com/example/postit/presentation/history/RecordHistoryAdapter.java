@@ -107,7 +107,7 @@ public class RecordHistoryAdapter extends RecyclerView.Adapter<RecordHistoryAdap
             } else {
                 binding.questionTextView.setText("알 수 없는 질문입니다.");
             }
-            binding.answerTextView.setText("[재생] " + data.getAnswer());
+            binding.answerTextView.setText("[재생]");
 
 
         }
