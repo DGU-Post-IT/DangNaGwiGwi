@@ -2,6 +2,7 @@ package com.example.postit.presentation.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -60,13 +61,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        binding.layoutNagging.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, NaggingActivity.class);
-                startActivity(intent);
-            }
-        });
 
         binding.layoutPlant.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
                     getResources().getColor(R.color.sad_mint)};
             @Override
             public void onChanged(Integer[] integers) {
+                Log.d("msg", "감정 데이터 추가시작");
                 binding.proportionView.removeAllViewsInLayout();
                 ProportionsBar pb = new ProportionsBar(getApplicationContext());
                 pb.showGaps(false);
@@ -107,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 int color = 0;
                 for (int i =0;i<integers.length;i++) {
                     if(integers[i]!=0){
+                        Log.d("msg", "감정 데이터 추가중");
                     pb.addColors(colors[i]);
                     pb.addValues(integers[i]);
                     color = colors[i];
@@ -117,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                     pb.addColors(color);
                     pb.addValues(1);
                 }else if(cnt ==0){//데이터가 없는 경우
-
+                    Log.d("msg", "감정 데이터 없음");
                 }
                 binding.proportionView.addView(pb);
             }

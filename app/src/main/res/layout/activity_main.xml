@@ -53,43 +53,46 @@
             android:background="#4D4D4D"
             />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:layout_weight="0.5">
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_check"
-                android:layout_weight="1"
-                />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="6"
-                android:layout_height="wrap_content"
-                android:text="이번주 나의 기분은?"
-                android:textSize="30dp"
-                android:textStyle="bold"
-                android:textColor="#000000"/>
-
-        </LinearLayout>
-
         <androidx.cardview.widget.CardView
-            android:layout_margin="14dp"
+            android:layout_margin="10dp"
             app:cardElevation="20dp"
             app:cardCornerRadius="8dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.6">
+            android:layout_weight="1.3">
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_gravity="center">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:layout_weight="0.5">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/ic_check"
+                        android:layout_weight="1"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="6"
+                        android:layout_height="wrap_content"
+                        android:text="이번주 나의 기분은?"
+                        android:textSize="25dp"
+                        android:textStyle="bold"
+                        android:textColor="#000000"/>
+
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -182,6 +185,96 @@
 
         </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.6"
+            android:id="@+id/question_info_card_view"
+            android:layout_marginHorizontal="10dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="20dp"
+            android:layout_marginBottom="10dp"
+            >
+
+            <LinearLayout
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                >
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_mike"
+                    android:outlineProvider="background"
+                    android:clipToOutline="true"
+                    android:layout_margin="8dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="23sp"
+                    android:text = "아직 오늘의 기록이 없어요."
+                    />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.6"
+            android:id="@+id/plant_info_card_view"
+            android:layout_marginHorizontal="10dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="20dp"
+            android:layout_marginBottom="10dp"
+            >
+
+            <LinearLayout
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                >
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/clusia_image"
+                    android:background="@drawable/ic_circle"
+                    android:outlineProvider="background"
+                    android:scaleType="centerCrop"
+                    android:clipToOutline="true"
+                    android:layout_margin="8dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:textSize="27sp"
+                    android:textColor="@color/happy_pink"
+                    android:text = "3"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="23sp"
+                    android:text = "일  전에 물을 줬습니다."
+                    />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+
 
         <LinearLayout
             android:id="@+id/layout_weeklycheck"
@@ -190,7 +283,7 @@
             android:background="#FFC000"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_weight="1.3"
+            android:layout_weight="1"
             android:foreground="?android:attr/selectableItemBackground"
             android:focusable="true"
             android:clickable="true">
@@ -198,9 +291,9 @@
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_mom_calendar"
+                android:src="@drawable/ic_parent_memory"
                 android:layout_weight="1"
-                android:padding="5dp"/>
+                android:padding="10dp"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -220,42 +313,42 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/layout_nagging"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="#8FD9B6"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_weight="1.3"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:focusable="true"
-            android:clickable="true">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/layout_nagging"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:background="#8FD9B6"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_weight="1.3"-->
+<!--            android:foreground="?android:attr/selectableItemBackground"-->
+<!--            android:focusable="true"-->
+<!--            android:clickable="true">-->
 
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_mom_nagging"
-                android:layout_weight="1"
-                android:padding="10dp"/>
+<!--            <ImageView-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/ic_mom_nagging"-->
+<!--                android:layout_weight="1"-->
+<!--                android:padding="10dp"/>-->
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="잔소리하기"
-                android:textAlignment="center"
-                android:layout_weight="2"
-                android:textSize="30dp"
-                />
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_mom_kkeokse"
-                android:padding="20dp"
-                android:layout_weight="0.5"/>
+<!--            <TextView-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="잔소리하기"-->
+<!--                android:textAlignment="center"-->
+<!--                android:layout_weight="2"-->
+<!--                android:textSize="30dp"-->
+<!--                />-->
+<!--            <ImageView-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/ic_mom_kkeokse"-->
+<!--                android:padding="20dp"-->
+<!--                android:layout_weight="0.5"/>-->
 
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
         <LinearLayout
             android:id="@+id/layout_plant"
@@ -264,7 +357,7 @@
             android:background="#B3DE7B"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_weight="1.3"
+            android:layout_weight="1"
             android:foreground="?android:attr/selectableItemBackground"
             android:focusable="true"
             android:clickable="true">
@@ -272,9 +365,9 @@
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_mom_plant"
+                android:src="@drawable/ic_parent_leaf"
                 android:layout_weight="1"
-                android:padding="5dp"/>
+                android:padding="10dp"/>
 
             <TextView
                 android:layout_width="0dp"
