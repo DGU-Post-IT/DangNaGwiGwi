@@ -52,11 +52,11 @@ public class EmotionRepository {
             public void subscribe(@NonNull MaybeEmitter<Integer[]> emitter) throws Throwable {
 //                HashMap<DayOfWeek, Integer> emotionMap2 = new HashMap<>();
                 Integer[] arr = new Integer[4];
-                    Arrays.fill(arr, 0);
+                Arrays.fill(arr, 0);
                 for (QueryDocumentSnapshot doc :
                         querySnapshot) {
                     EmotionRecord er = doc.toObject(EmotionRecord.class);
-                    Log.d(TAG, "subscribe: "+er.getTime()+" "+er.getEmotion());
+                    Log.d(TAG, "subscribe: " + er.getTime() + " " + er.getEmotion());
                     LocalDate localDate = er.getTime().toInstant() // Date -> Instant
                             .atZone(ZoneId.systemDefault()) // Instant -> ZonedDateTime
                             .toLocalDate();
