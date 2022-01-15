@@ -63,7 +63,7 @@ public class QuestionActivity extends AppCompatActivity {
         binding = ActivityQuestionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         //questionId = getIntent().getIntExtra("questionId",-1);
-        questionId = (int) ((KoreanTime.koreaToday()) % 5);
+        questionId = (int) ((KoreanTime.koreaToday()) % 10);
         bindEmotionDialog();
 
     }
@@ -131,19 +131,34 @@ public class QuestionActivity extends AppCompatActivity {
         player = MediaPlayer.create(this, QuestionIdUtil.getAudioId(questionId));
         switch (questionId){
             case 0:
-                binding.tvQuestion.setText("어르신, 오늘 가장 \n 재미있었던 일이 뭐에요?");
+                binding.tvQuestion.setText("나에게 가장 잘해줬던 사람은 누구인가요? \n 그 사람에게 어떤 선물을 주고 싶나요?");
                 break;
             case 1:
-                binding.tvQuestion.setText("어르신, 오늘 가장 \n 재미있었던 일이 뭐에요?");
+                binding.tvQuestion.setText("다시 돌아가고 싶은 순간은 언제였나요?");
                 break;
             case 2:
-                binding.tvQuestion.setText("어르신, 오늘 가장 \n 재미있었던 일이 뭐에요?");
+                binding.tvQuestion.setText("가장 열심히 살았던 순간은 언제였나요?");
                 break;
             case 3:
-                binding.tvQuestion.setText("어르신, 오늘 가장 \n 재미있었던 일이 뭐에요?");
+                binding.tvQuestion.setText("가장 뿌듯했던 순간은 언제였나요?");
                 break;
             case 4:
-                binding.tvQuestion.setText("어르신, 오늘 가장 \n 재미있었던 일이 뭐에요?");
+                binding.tvQuestion.setText("만약 내일 해외여행을 갈 수 있다면 어느나라에 가고 싶나요?");
+                break;
+            case 5:
+                binding.tvQuestion.setText("오늘 가장 재밌었던 일이 뭔가요?");
+                break;
+            case 6:
+                binding.tvQuestion.setText("가장 좋아하는 음식이 뭐예요?\n 누구랑 같이 먹고싶나요?");
+                break;
+            case 7:
+                binding.tvQuestion.setText("어렸을 때 꿈이 뭐였어요?");
+                break;
+            case 8:
+                binding.tvQuestion.setText("보고싶은 친구들이 있나요? \n친구들이랑 주로 뭐하고 노셨어요?");
+                break;
+            case 9:
+                binding.tvQuestion.setText("좋아하는 색깔이 뭐예요?");
                 break;
         }
 
