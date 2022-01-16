@@ -77,9 +77,14 @@ public class EmotionRepository {
             @Override
             public void subscribe(@NonNull MaybeEmitter<QuerySnapshot> emitter) throws Throwable {
                 Log.d(TAG, "subscribe: " + Thread.currentThread().getName());
+                Date sd = Date.from(date.with(TemporalAdjusters.previousOrSame(firstDayOfWeek)).atStartOfDay(ZoneId.of("Asia/Seoul")).toInstant());
+                Date ed = Date.from(date.with(TemporalAdjusters.nextOrSame(lastDayOfWeek)).atStartOfDay(ZoneId.of("Asia/Seoul")).toInstant());
+
+                Log.d(TAG, "subscribe: "+sd.getYear()+sd.getMonth()+sd.getDate());
+                Log.d(TAG, "subscribe: "+ed.getYear()+ed.getMonth()+ed.getDate());
                 Task task = db.collection("users").document(auth.getCurrentUser().getUid())
                         .collection("emotionRecord")
-                        .whereLessThanOrEqualTo("time", Date.from(date.with(TemporalAdjusters.nextOrSame(lastDayOfWeek)).atStartOfDay(ZoneId.of("Asia/Seoul")).toInstant()))
+//                        .whereLessThanOrEqualTo("time", Date.from(date.with(TemporalAdjusters.nextOrSame(lastDayOfWeek)).atStartOfDay(ZoneId.of("Asia/Seoul")).toInstant()))
                         .whereGreaterThanOrEqualTo("time", Date.from(date.with(TemporalAdjusters.previousOrSame(firstDayOfWeek)).atStartOfDay(ZoneId.of("Asia/Seoul")).toInstant()))
                         .orderBy("time", Query.Direction.DESCENDING)
                         .get().addOnSuccessListener((documentSnapshots -> {
