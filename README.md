@@ -54,8 +54,7 @@ In Hyo°C :
 - Account management functions.
 
 <img src="https://user-images.githubusercontent.com/71082601/147050151-c228a39b-ab38-4cec-9155-be5bddadb6b4.png" align="center" vspace="10">
-![효도씨 git 이미지1](https://user-images.githubusercontent.com/86652565/151529939-1cc65517-74e1-42f5-a710-49427d3646c1.png)
-
+![image](https://user-images.githubusercontent.com/86652565/151530032-2d9a7f3b-f41e-440e-8055-f2a6c7c21335.png)
 <img src="https://user-images.githubusercontent.com/71082601/147050162-3add80ec-ec08-44be-9b52-c89f6fe464bf.png" align="center" vspace="10">
 <img src="https://user-images.githubusercontent.com/71082601/147050168-52f6a3d9-b389-4752-bbcf-c5f8ddb71739.png" align="center" vspace="10">
 <img src="https://user-images.githubusercontent.com/71082601/147050183-860e8e51-e8e7-4b8b-8996-b8b6db43be86.png" align="center" vspace="10">
