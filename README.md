@@ -9,6 +9,7 @@ width="120" vspace="10">
 효°C 는 노년층의 우울증을 예방하고, 가족 간의 관계를 증진시킬 수 있는 앱입니다.
 노령세대와 부모세대가 원하는 정보, 스마트폰 숙련도가 다름을 신경써서 두 개의 앱을 제작하였습니다.
 레이더 센서를 기반으로 행동을 인지하여, 스마트폰이 미숙한 노년층에게도 효과적으로 접근성을 높였습니다.
+
 Hyo °C is an app that can prevent depression in the elderly and promote family relationships.
 We created two apps, paying attention to the difference in information and smartphone proficiency that the elderly and their parents want.
 Recognizing behavior based on radar sensors, it has effectively increased accessibility for older people who are inexperienced with smartphones.
