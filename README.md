@@ -15,6 +15,7 @@ We created two apps, paying attention to the difference in information and smart
 Recognizing behavior based on radar sensors, it has effectively increased accessibility for older people who are inexperienced with smartphones.
 
 Hyo°C is ***not available*** on the Google Play Store yet.
+
 *English description is below each Korean description.
 
 ## Skill Stack
