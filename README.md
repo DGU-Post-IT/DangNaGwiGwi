@@ -40,6 +40,7 @@ hyodo° is ***not available*** on the Google Play Store yet.
 - 이외의 계정 관리 기능 등이 있습니다.
 
 <img src="https://user-images.githubusercontent.com/71082601/147050151-c228a39b-ab38-4cec-9155-be5bddadb6b4.png" align="center" vspace="10">
+![효도씨 git 이미지1](https://user-images.githubusercontent.com/86652565/151653828-4bdf44ce-2910-44d6-92c7-aabf2cbb7afa.png)
 <img src="https://user-images.githubusercontent.com/71082601/147050162-3add80ec-ec08-44be-9b52-c89f6fe464bf.png" align="center" vspace="10">
 <img src="https://user-images.githubusercontent.com/71082601/147050168-52f6a3d9-b389-4752-bbcf-c5f8ddb71739.png" align="center" vspace="10">
 <img src="https://user-images.githubusercontent.com/71082601/147050183-860e8e51-e8e7-4b8b-8996-b8b6db43be86.png" align="center" vspace="10">
