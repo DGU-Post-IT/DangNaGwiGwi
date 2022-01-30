@@ -1,8 +1,11 @@
 plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'  // Google Services plugin
+    id 'kotlin-android'
 
 }
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 android {
     compileSdk 31
@@ -15,6 +18,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "CLOVA_KEY", properties['clova_key']
     }
 
     buildTypes {
@@ -30,6 +34,11 @@ android {
     dataBinding{
         enabled true
     }
+    sourceSets{
+
+    main.java.srcDirs += 'src/main/kotlin'
+    }
+
 }
 repositories{
 
@@ -71,5 +80,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0"
+
 
 }

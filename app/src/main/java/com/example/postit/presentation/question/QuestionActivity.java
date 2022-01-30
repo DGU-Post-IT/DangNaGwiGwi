@@ -333,7 +333,8 @@ public class QuestionActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call call, Throwable t) {
-
+                Log.d(TAG, "onFailure: getSttFailed");
+                Log.d(TAG, "onFailure: "+t.toString());
             }
         });
     }
