@@ -4,5 +4,9 @@ public enum Emotion {
     HAPPY,
     SAD,
     ANGRY,
-            SOSO
+    ANXIETY,
+    //감정추가
+    WOUND,
+    EMBARRASS
+
 }

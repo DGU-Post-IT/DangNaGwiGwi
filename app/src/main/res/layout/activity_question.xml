@@ -192,8 +192,8 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_margin="15dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/soso_button"
+                    app:layout_constraintBottom_toTopOf="@+id/wound_button"
+                    app:layout_constraintEnd_toStartOf="@id/anxiety_button"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/happy_button"
                     android:foreground="?android:attr/selectableItemBackground"
@@ -201,16 +201,46 @@
                     android:clickable="true"/>
 
                 <ImageView
-                    android:id="@+id/soso_button"
-                    android:src="@drawable/button_mom_soso"
+                    android:id="@+id/anxiety_button"
+                    android:src="@drawable/button_mom_anxiety"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_margin="15dp"
                     android:text="soso"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/embarrass_button"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/angry_button"
-                    app:layout_constraintTop_toTopOf="@id/angry_button"
+                    app:layout_constraintTop_toBottomOf="@+id/sad_button"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:focusable="true"
+                    android:clickable="true"/>
+
+                <ImageView
+                    android:id="@+id/wound_button"
+                    android:src="@drawable/button_mom_anxiety"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="15dp"
+                    android:text="wound"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/embarrass_button"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/angry_button"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:focusable="true"
+                    android:clickable="true"/>
+
+                <ImageView
+                    android:id="@+id/embarrass_button"
+                    android:src="@drawable/button_mom_anxiety"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="15dp"
+                    android:text="embarrass"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/wound_button"
+                    app:layout_constraintTop_toBottomOf="@id/anxiety_button"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:focusable="true"
                     android:clickable="true"/>
