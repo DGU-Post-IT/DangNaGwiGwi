@@ -11,7 +11,7 @@ import retrofit2.http.POST
 interface NaverApi {
     @Headers(
                 "Content-Type:application/json",
-                "X-CLOVASPEECH-API-KEY:${BuildConfig.CLOVA_KEY}"
+                //"X-CLOVASPEECH-API-KEY:${BuildConfig.CLOVA_KEY}"
 
     )
     @POST("recognizer/url")

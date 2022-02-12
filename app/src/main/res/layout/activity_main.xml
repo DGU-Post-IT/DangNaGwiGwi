@@ -88,6 +88,7 @@
                         android:layout_weight="6"
                         android:layout_height="wrap_content"
                         android:text="이번주 나의 기분은?"
+                        android:paddingBottom="10dp"
                         android:textSize="25dp"
                         android:textStyle="bold"
                         android:textColor="#000000"/>
