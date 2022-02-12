@@ -22,7 +22,7 @@ public class MyInfoViewModel extends AndroidViewModel {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
-    MutableLiveData<ParentUser> user = new MutableLiveData<>();
+    MutableLiveData<ParentUser> user = new MutableLiveData<>();     //질문
 
     public MyInfoViewModel(@NonNull Application application) {
         super(application);

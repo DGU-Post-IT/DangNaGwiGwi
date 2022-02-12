@@ -51,7 +51,7 @@ public class MyInfoActivity extends AppCompatActivity {
         bindSaveButton();
         model.fetchUserInfo();
 
-        model.user.observe(this, new Observer<ParentUser>() {
+        model.user.observe(this, new Observer<ParentUser>() {   //여기 질문
             @Override
             public void onChanged(ParentUser parentUser) {
                 if(parentUser!=null){
@@ -76,7 +76,7 @@ public class MyInfoActivity extends AppCompatActivity {
 
 
 
-    private void initEditTExt() {
+    private void initEditTExt() {   //질문 : 이전 텍스트가 어떻게 저장되는지?
         binding.birthYear.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
