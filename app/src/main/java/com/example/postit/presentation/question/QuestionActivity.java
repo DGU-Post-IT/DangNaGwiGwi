@@ -78,9 +78,16 @@ public class QuestionActivity extends AppCompatActivity {
         binding.angryButton.setOnClickListener((v) -> {
             saveEmotionRecordOnDataBase(2);
         });
-        binding.sosoButton.setOnClickListener((v) -> {
+        binding.anxietyButton.setOnClickListener((v) -> {
             saveEmotionRecordOnDataBase(3);
         });
+        binding.woundButton.setOnClickListener((v) -> {
+            saveEmotionRecordOnDataBase(4);
+        });
+        binding.embarrassButton.setOnClickListener((v) -> {
+            saveEmotionRecordOnDataBase(5);
+        });
+
 
     }
 

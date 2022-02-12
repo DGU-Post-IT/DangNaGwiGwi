@@ -34,7 +34,7 @@ public class MainViewModel extends AndroidViewModel {
     final DayOfWeek firstDayOfWeek = WeekFields.of(Locale.KOREA).getFirstDayOfWeek();
     final DayOfWeek lastDayOfWeek = DayOfWeek.of(((firstDayOfWeek.getValue() + 6) % DayOfWeek.values().length) + 1);
 
-    MutableLiveData<Integer[]> emotionCount = new MutableLiveData<>(new Integer[]{0,0,0,0});
+    MutableLiveData<Integer[]> emotionCount = new MutableLiveData<>(new Integer[]{0,0,0,0,0,0});
     MutableLiveData<PlantRecord> plantRecord = new MutableLiveData<>(null);
     MutableLiveData<AudioRecord> audioRecord = new MutableLiveData<>(null);
 

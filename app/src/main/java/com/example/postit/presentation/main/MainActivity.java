@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("msg", "onCreate 호출");
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         model = new ViewModelProvider(this).get(MainViewModel.class);
 
         bindButton();
+        Log.d("msg", "initProportionView 호출");
         initProportionView();
 
         model.fetchWeeklyData();
@@ -85,14 +87,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void initProportionView(){
+        Log.d("msg", "initProportionView 실행");
 
         model.emotionCount.observe(this, new Observer<Integer[]>() {
             int[] colors = {getResources().getColor(R.color.happy_pink),
-                    getResources().getColor(R.color.soso_blue),
+                    getResources().getColor(R.color.sad_mint),
                     getResources().getColor(R.color.angry_yellow),
-                    getResources().getColor(R.color.sad_mint)};
+                    getResources().getColor(R.color.anxiety_blue),
+                    getResources().getColor(R.color.wound_green),
+                    getResources().getColor(R.color.embarrass_gray)};
             @Override
             public void onChanged(Integer[] integers) {
+                Log.d("배열", integers[0]+", "+integers[1]+", "+integers[2]+", "+integers[3]+", "+integers[4]+", "+integers[5]+", ");
                 Log.d("msg", "감정 데이터 추가시작");
                 binding.proportionView.removeAllViewsInLayout();
                 ProportionsBar pb = new ProportionsBar(getApplicationContext());
