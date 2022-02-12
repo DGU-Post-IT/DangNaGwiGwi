@@ -77,8 +77,8 @@ public class RecordHistoryAdapter extends RecyclerView.Adapter<RecordHistoryAdap
                 icon = R.drawable.ic_weather_sad_shadow;
             } else if (data.getEmotion() == Emotion.ANGRY.ordinal()) {
                 icon = R.drawable.ic_weather_angry_shadow;
-            } else if (data.getEmotion() == Emotion.SOSO.ordinal()) {
-                icon = R.drawable.ic_weather_soso_shadow;
+            } else if (data.getEmotion() == Emotion.ANXIETY.ordinal()) {
+                icon = R.drawable.ic_weather_anxiety_shadow;
             } else {
                 icon = R.drawable.ic_baseline_not_interested_24;
             }

@@ -80,10 +80,25 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     private void bindEmotionDialog() {
-        binding.happyButton.setOnClickListener((v) -> saveEmotionRecordOnDataBase(0));
-        binding.sadButton.setOnClickListener((v) -> saveEmotionRecordOnDataBase(1));
-        binding.angryButton.setOnClickListener((v) -> saveEmotionRecordOnDataBase(2));
-        binding.sosoButton.setOnClickListener((v) -> saveEmotionRecordOnDataBase(3));
+        binding.happyButton.setOnClickListener((v) -> {
+            saveEmotionRecordOnDataBase(0);
+        });
+        binding.sadButton.setOnClickListener((v) -> {
+            saveEmotionRecordOnDataBase(1);
+        });
+        binding.angryButton.setOnClickListener((v) -> {
+            saveEmotionRecordOnDataBase(2);
+        });
+        binding.anxietyButton.setOnClickListener((v) -> {
+            saveEmotionRecordOnDataBase(3);
+        });
+        binding.woundButton.setOnClickListener((v) -> {
+            saveEmotionRecordOnDataBase(4);
+        });
+        binding.embarrassButton.setOnClickListener((v) -> {
+            saveEmotionRecordOnDataBase(5);
+        });
+
 
     }
 
