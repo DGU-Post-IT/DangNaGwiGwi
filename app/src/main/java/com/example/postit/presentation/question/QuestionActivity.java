@@ -16,6 +16,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.example.postit.api.ClovaSttBody;
+import com.example.postit.api.NaverApi;
+import com.example.postit.api.RetrofitBuilder;
+import com.example.postit.api.response.ClovaResponse;
 import com.example.postit.util.QuestionIdUtil;
 import com.example.postit.R;
 import com.example.postit.databinding.ActivityQuestionBinding;
@@ -38,7 +42,14 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class QuestionActivity extends AppCompatActivity {
+
+    private static final String TAG = "QuestionActivity";
+    NaverApi naverApi = new RetrofitBuilder().getNaverApi();
 
     final int RECORD_AUDIO_PERMISSION_CODE = 100;
     MediaPlayer player = null;
@@ -114,7 +125,7 @@ public class QuestionActivity extends AppCompatActivity {
                 player2.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mediaPlayer) {
-                        finish();
+//                        finish();
                     }
                 });
             }
@@ -202,13 +213,13 @@ public class QuestionActivity extends AppCompatActivity {
 
     private void startRecorder() {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String audioFileName = "RecordExample_" + timeStamp + "_" + "audio.3gp";
+        String audioFileName = "RecordExample_" + timeStamp + "_" + "audio.ogg";
 
         cacheFile = new File(getApplicationContext().getCacheDir(), audioFileName);
         recorder = new MediaRecorder();
         recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.OGG);
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.OPUS);
         recorder.setAudioEncodingBitRate(16);
         recorder.setAudioSamplingRate(44100);
         recorder.setOutputFile(cacheFile.getAbsolutePath());
@@ -290,6 +301,7 @@ public class QuestionActivity extends AppCompatActivity {
                     Uri downloadUri = task.getResult();
                     Log.d("upload!!", downloadUri.toString());
                     Toast.makeText(getApplicationContext(), "업로드 성공", Toast.LENGTH_SHORT);
+                    getSttText(downloadUri.toString());
                     writeAudioRecordDatabase(downloadUri.toString());
                 } else {
                     // Handle failures
@@ -299,6 +311,7 @@ public class QuestionActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void writeAudioRecordDatabase(String downloadUri) {
         String myID = auth.getCurrentUser().getUid();
@@ -322,6 +335,23 @@ public class QuestionActivity extends AppCompatActivity {
         player_feeling_check.start();
         binding.tvInfo2.setVisibility(View.VISIBLE);
         binding.cvEmotioncheck.setVisibility(View.VISIBLE);
+    }
+
+    private void getSttText(String audioUrl){
+        Call<ClovaResponse> call = naverApi.getSTT(new ClovaSttBody(audioUrl));
+        call.enqueue(new Callback<ClovaResponse>() {
+            @Override
+            public void onResponse(Call<ClovaResponse> call, Response<ClovaResponse> response) {
+                ClovaResponse cr = response.body();
+                Log.d(TAG, "onResponse: "+ cr.getText());
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                Log.d(TAG, "onFailure: getSttFailed");
+                Log.d(TAG, "onFailure: "+t.toString());
+            }
+        });
     }
 
     public void updateRemainTimeView(long l) {
