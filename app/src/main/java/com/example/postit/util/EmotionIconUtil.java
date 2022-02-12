@@ -6,7 +6,7 @@ public class EmotionIconUtil {
     public static int getEmotionIcon(int emotion) {
         switch (emotion) {
             case 0:
-                return R.drawable.ic_weather_good_shadow;
+                return R.drawable.ic_weather_happy_shadow;
             case 1:
                 return R.drawable.ic_weather_sad_shadow;
             case 2:

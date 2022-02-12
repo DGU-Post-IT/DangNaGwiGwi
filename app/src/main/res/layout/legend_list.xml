@@ -28,7 +28,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/good_text"
-                android:src="@drawable/ic_weather_good_shadow" />
+                android:src="@drawable/ic_weather_happy_shadow" />
 
             <TextView
                 app:layout_constraintTop_toBottomOf="@id/good_image_view"

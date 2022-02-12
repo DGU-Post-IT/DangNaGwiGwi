@@ -60,7 +60,7 @@ public class ChildrenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             super(binding.getRoot());
             this.binding = binding;
             binding.acceptButton.setOnClickListener((v) -> {
-                if (listener != null) {
+                if (listener != null) { //질문 : 여기가 무슨뜻?
                     listener.onItemClick(v, data.get(getAdapterPosition()));
                 }
             });

@@ -128,8 +128,12 @@ public class MainActivity extends AppCompatActivity {
 
         model.audioRecord.observe(this,ar->{
             if(ar!=null){
+                binding.icEmotionCheckYes.setVisibility(View.VISIBLE);
+                binding.icEmotionCheckNo.setVisibility(View.GONE);
                 binding.todayRecordText.setText("오늘의 감정기록을 이미 하셨습니다.");
             }else{
+                binding.icEmotionCheckYes.setVisibility(View.GONE);
+                binding.icEmotionCheckNo.setVisibility(View.VISIBLE);
                 binding.todayRecordText.setText("오늘의 감정기록을 하지 않으셨습니다.");
             }
         });
