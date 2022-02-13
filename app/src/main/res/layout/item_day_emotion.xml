@@ -59,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/play_layout"
         app:layout_constraintTop_toTopOf="@+id/week_day_text_view"
-        tools:src="@drawable/ic_weather_good_shadow" />
+        tools:src="@drawable/ic_weather_happy_shadow" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

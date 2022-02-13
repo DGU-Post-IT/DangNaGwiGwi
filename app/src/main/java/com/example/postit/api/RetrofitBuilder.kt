@@ -7,9 +7,9 @@ import java.util.concurrent.TimeUnit
 
 class RetrofitBuilder {
     val okHttpClient = OkHttpClient.Builder()
-        .connectTimeout(2,TimeUnit.MINUTES)
-        .readTimeout(2,TimeUnit.MINUTES)
-        .writeTimeout(2,TimeUnit.MINUTES)
+        .connectTimeout(2,TimeUnit.SECONDS)
+        .readTimeout(2,TimeUnit.SECONDS)
+        .writeTimeout(2,TimeUnit.SECONDS)
         .build()
 
     val retrofit = Retrofit.Builder()
