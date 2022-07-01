@@ -8,5 +8,5 @@ dependencyResolutionManagement {
         maven { url "https://oss.jfrog.org/libs-snapshot" }
     }
 }
-rootProject.name = "postIT"
+rootProject.name = "hyodo-c-parent"
 include ':app'
