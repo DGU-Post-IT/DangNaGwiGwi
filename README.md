@@ -55,7 +55,7 @@ In Hyo°C :
 - A chart where you can check your parents' emotional records.
 - Account management functions.
 
-<img src="https://user-images.githubusercontent.com/71082601/147050151-c228a39b-ab38-4cec-9155-be5bddadb6b4.png" align="center" vspace="10">
+![image](https://user-images.githubusercontent.com/86652565/178502221-ceb97b86-7ac8-4210-bd65-510eca819b0a.png)
 <img src="https://user-images.githubusercontent.com/71082601/147050162-3add80ec-ec08-44be-9b52-c89f6fe464bf.png" align="center" vspace="10">
 <img src="https://user-images.githubusercontent.com/71082601/147050168-52f6a3d9-b389-4752-bbcf-c5f8ddb71739.png" align="center" vspace="10">
 <img src="https://user-images.githubusercontent.com/71082601/147050183-860e8e51-e8e7-4b8b-8996-b8b6db43be86.png" align="center" vspace="10">
