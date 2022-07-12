@@ -61,7 +61,7 @@ In Hyo°C :
 <img src="https://user-images.githubusercontent.com/71082601/147050183-860e8e51-e8e7-4b8b-8996-b8b6db43be86.png" align="center" vspace="10">
 <img src="https://user-images.githubusercontent.com/71082601/147050191-3207db43-3b9b-49ac-9378-a8dc2262ede9.png" align="center" vspace="10">
 
-![효도씨 git 이미지1](https://user-images.githubusercontent.com/86652565/151655401-4d9af638-603d-4ac7-9e48-1415a311f437.png)
+![image](https://user-images.githubusercontent.com/86652565/178502482-5643014b-94d3-48ad-b060-38d2c761b12f.png)
 <img width="960" alt="효도씨 git 이미지2" src="https://user-images.githubusercontent.com/86652565/151655391-848d5efa-c403-47d6-917a-e2992d5df767.png">
 <img width="960" alt="효도씨 git 이미지3" src="https://user-images.githubusercontent.com/86652565/151655395-bd4f3152-a81c-495b-8249-1e3244db5045.png">
 <img width="960" alt="효도씨 git 이미지4" src="https://user-images.githubusercontent.com/86652565/151655397-cc59db4e-61f4-4d69-a9e3-a95776764061.png">
